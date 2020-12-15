@@ -22,3 +22,6 @@ $ npm run dev
 $ npm run build
 ```
 You don't need switch dev or prod in config:)
+
+Good luck!
+
