@@ -1,13 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Covid Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Covid-dashboard</title>
+  <link rel="stylesheet" href="sass/wrapper-main-content.css"></link>
 </head>
 <body>
-    <h1>Hello Covid World &#128567!!!</h1>
+  <div class="wrapper-for-content">
+    <div class="cases">
+      <div class="cases__global-cases">Global cases</div>
+      <div class="cases__cases-by-region">block 2</div>
+    </div>
+    <div class="map">Map
+      <div class="zoom-button">
+        <div class="zoom__zoom-in">+</div>
+        <div class="zoom__zoom-out">-</div>
+      </div>
+    </div>
+    <div class="wrapper-for-global-deaths-and-chart">
+        <div class="global-deaths">Global Deaths
+          <div class="global-death-button button-death-and-recovered">deaths</div>
+          <div class="global-recovered-button button-death-and-recovered">recovered</div>
+        </div>
+        <div class="chart">Chart</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
