@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  color: white;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper-for-content {
+  width: 1600px;
+  height: 600px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.cases{
+  height: 100%;
+  width: 250px;
+}
+
+.cases__global-cases{
+  height: 20%;
+  background-color: rgb(91, 89, 125);
+  width: 100%;
+  border:5px solid black;
+}
+
+.cases__cases-by-region{
+  height: 80%;
+  background-color: rgb(91, 89, 125);
+  width: 100%;
+  border:5px solid black;
+}
+
+.map {
+  height: 100%;
+  background-color: rgb(91, 89, 125);
+  width: 1000px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  border:5px solid black;
+}
+
+.zoom-button{
+  width: 50px;
+  height: 100px;
+}
+
+.zoom__zoom-in{
+  width: 100%;
+  height: 50%;
+  background-color: rgb(35, 149, 214);
+}
+
+.zoom__zoom-out{
+  width: 100%;
+  height: 50%;
+  background-color: rgb(180, 22, 56);
+}
+
+.wrapper-for-global-deaths-and-chart{
+  height: 100%;
+  width: 350px;
+  display: flex;
+  flex-flow: column;
+}
+
+.global-deaths{
+  height: 100%;
+  background-color: rgb(91, 89, 125);
+  width: 100%;
+  border:5px solid black;
+}
+
+.button-death-and-recovered{
+  width: 150px;
+  height: 50px;
+  border: 2px solid;
+}
+
+.chart{
+  height: 50%;
+  background-color: rgb(91, 89, 125);
+  width: 350px;
+  border:5px solid black;
+}
+
+@media(max-width: 1599px){
+  .map{
+    order: 3;
+    width: 1150px;
+  }
+
+  .wrapper-for-global-deaths-and-chart{
+    flex-flow: row;
+    width: 750px;
+  }
+
+  .cases{
+    width: 400px;
+  }
+
+  .global-deaths{
+    width: 350px;
+  }
+
+  .wrapper-for-global-deaths{
+    height: 100%;
+  }
+  .chart{
+    height: 100%;
+    width: 400px;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 1149px) {
+  .map{
+    order: 3;
+    max-width: 768px;
+  }
+
+  .wrapper-for-global-deaths-and-chart{
+    width: 768px;
+  }
+  
+  .cases{
+    width: 768px;
+  }
+
+  .global-deaths {
+    width: 400px;
+  }
+
+  .chart{
+    width: 368px;
+  }
+}
+
+@media(min-width: 320px) and (max-width: 767px){
+  .wrapper-for-content{
+    width: 320px;
+  }
+
+  .map{
+    order: 3;
+    max-width: 320px;
+    max-height: 320px;
+  }
+  
+  .wrapper-for-global-deaths-and-chart{
+    flex-flow: column;
+    width: 320px;
+  }
+  
+  .cases{
+    width: 320px;
+  }
+
+  .global-deaths {
+    width: 320px;
+  }
+
+  .chart{
+    height: 70%;
+    width: 320px;
+  }
+}
