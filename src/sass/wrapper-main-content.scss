@@ -85,7 +85,7 @@
     width: 1150px;
   }
 
-  .wrapper-for-global-deaths-and-chart{
+  .content {
     flex-flow: row;
     width: 750px;
   }
@@ -101,7 +101,7 @@
   .wrapper-for-global-deaths{
     height: 100%;
   }
-  .chart{
+  .content__chart{
     height: 100%;
     width: 400px;
   }
@@ -113,7 +113,7 @@
     max-width: 768px;
   }
 
-  .wrapper-for-global-deaths-and-chart{
+  .content {
     width: 768px;
   }
 
@@ -125,7 +125,7 @@
     width: 400px;
   }
 
-  .chart{
+  .content__chart{
     width: 368px;
   }
 }
@@ -141,7 +141,7 @@
     max-height: 320px;
   }
 
-  .wrapper-for-global-deaths-and-chart{
+  .content{
     flex-flow: column;
     width: 320px;
   }
@@ -150,11 +150,11 @@
     width: 320px;
   }
 
-  .global-deaths {
+  .content__table {
     width: 320px;
   }
 
-  .chart{
+  .content__chart{
     height: 70%;
     width: 320px;
   }
