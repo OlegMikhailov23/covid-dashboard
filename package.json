@@ -52,7 +52,10 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint:fix"
+      "eslint --fix"
     ]
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
   }
 }
