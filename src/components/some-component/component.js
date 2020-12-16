@@ -1,5 +1,5 @@
-/* const sayHi = () => {
-  console.log('Hi from component')
-}
+const sayHi = () => {
+  // console.log('Hi from component');
+};
 
-export default sayHi */
+export default sayHi;
