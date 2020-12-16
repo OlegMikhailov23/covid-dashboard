@@ -27,7 +27,7 @@ function setDMode() {
 const config = {
   mode: setDMode(),
   devtool: setDevTool(),
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
