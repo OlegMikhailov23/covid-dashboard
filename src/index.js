@@ -1,6 +1,8 @@
 import './sass/style.scss';
 
-import sayHi from './components/some-component/component';
+import getData from './components/data.map/data.map';
 
-sayHi();
-// console.log('Hello Covid World!!!');
+import map from './components/map/map.component';
+
+map();
+getData('https://api.covid19api.com/summary');
