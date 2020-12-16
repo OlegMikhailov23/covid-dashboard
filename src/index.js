@@ -1,6 +1,6 @@
-import './sass/style.scss'
+import './sass/style.scss';
 
-import sayHi from "./components/some-component/component";
+import sayHi from './components/some-component/component';
 
 sayHi();
-console.log('Hello Covid World!!!')
+// console.log('Hello Covid World!!!');
