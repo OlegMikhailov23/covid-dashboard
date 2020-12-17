@@ -1,8 +1,5 @@
 import './sass/style.scss';
 
-import getData from './components/data.map/data.map';
+import initMap from './components/map/mapInit.component';
 
-import map from './components/map/map.component';
-
-map();
-getData('https://api.covid19api.com/summary');
+initMap('https://disease.sh/v3/covid-19/countries');

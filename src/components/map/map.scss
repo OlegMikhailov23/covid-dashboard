@@ -1,0 +1,51 @@
+@import '../../sass/variables';
+@import '../../sass/mixin';
+
+.popup .leaflet-popup-tip,
+.popup .leaflet-popup-content-wrapper {
+  background: #2e2e2e;
+  border-radius: 0;
+  min-width: 200px;
+  border: 1px solid #cc22f1;
+  & .map__country-name {
+    color: $third-font-color;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.06rem;
+  }
+  & .map__total-cases {
+    color: #eee228;
+    padding-bottom: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+  }
+  & .map__total-deaths {
+    position: relative;
+    color: $second-font-color;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+    &::before {
+      @include pseudo();
+      top:-5px;
+      left: -20px;
+      width: 20px;
+      height: 20px;
+      background-image: url("../assets/img/reaper.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+    }
+  }
+}
+
+.pulse {
+  animation: pulsate 3s infinite;
+}
+
+@keyframes pulsate {
+  0% {opacity: 0.4;}
+  70% {opacity: 1.0;}
+  100% {opacity: 0.4;}
+}
