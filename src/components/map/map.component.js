@@ -1,12 +1,35 @@
-const map = () => {
-  // eslint-disable-next-line no-undef
-  const mymap = L.map('mapid').setView([51.505, -0.09], 3);
+class Map {
+  constructor(layout) {
+    this.layout = layout;
+    this.map = L.map('mapid').setView([59.534, 31.172], 3.5);
+    this.intensityRadCoefficient = 1500;
+    this.intensityOpacityCoefficient = 0.01;
+  }
 
-  // eslint-disable-next-line no-undef
-  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-    maxZoom: 20,
-    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-  }).addTo(mymap);
-};
+  addLayout() {
+    L.tileLayer(this.layout, {
+      maxZoom: 20,
+    }).addTo(this.map);
+  }
 
-export default map;
+  putPoint(lat, lon, color, fillColor, opacity, rad) {
+    this.circle = L.circle([lat, lon], {
+      className: 'pulse',
+      color,
+      fillColor,
+      fillOpacity: opacity * this.intensityOpacityCoefficient,
+      radius: rad * this.intensityRadCoefficient,
+    }).addTo(this.map);
+  }
+
+  showPopup(message) {
+    const customPopup = message;
+    const customOptions = {
+      className: 'popup',
+      keepInView: true,
+    };
+    this.circle.bindPopup(customPopup, customOptions);
+  }
+}
+
+export default Map;
