@@ -1,0 +1,70 @@
+.cases {
+  height: 100%;
+  width: 250px;
+
+  &__global-cases {
+    height: 20%;
+    background-color: rgb(14, 14, 29);
+    width: 100%;
+    font-size: 28px;
+    text-align: center;
+    padding: 20px;
+
+    &__total-cases{
+      color: rgb(204, 24, 24);
+      font-weight: 900;
+    }
+  }
+
+  &__cases-by-region {
+    height: 80%;
+    background-color: rgb(91, 89, 125);
+    width: 100%;
+  }
+}
+
+.tabulator{
+  overflow-x:hidden;
+  font-size: 18px;
+  border: none;
+}
+
+.tabulator-row .tabulator-cell{
+  border: none;
+}
+
+.tabulator .tabulator-header .tabulator-col{
+  background: black;
+  border: none;
+}
+
+.tabulator .tabulator-header{
+  color: white;
+  background-color: black;
+  border: none;
+}
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover{
+  color: white;
+  background-color: black;
+}
+
+.tabulator .tabulator-tableHolder{
+  background-color: black;
+}
+
+.tabulator-row-odd{
+  color: white;
+  background-color: black;
+}
+
+.tabulator-row.tabulator-row-even{
+  color: white;
+  background-color: black;
+}
+
+.tabulator-row.tabulator-selectable:hover{
+  background-color: black;
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+}

@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tabulator-tables@4.9.1/dist/css/tabulator.min.css" rel="stylesheet">
   <title>Covid-dashboard</title>
 </head>
 <body>
   <div class="wrapper-for-content">
     <div class="cases">
-      <div class="cases__global-cases">Global cases</div>
-      <div class="cases__cases-by-region">block 2</div>
+      <div class="cases__global-cases">Global cases
+        <p class="cases__global-cases__total-cases"></p>
+      </div>
+      <div class="cases__cases-by-region">
+        <div id="table"></div>
+      </div>
     </div>
     <div class="map">Map
       <div class="map__zoom-button">
