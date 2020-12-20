@@ -21,13 +21,17 @@
     background-color: rgb(91, 89, 125);
     width: 100%;
 
-    &__test-button {
-      font-size: 16px;
-      height: 50px;
-      width: 100px;
-      background-color: black;
-      border: 1px solid red;
-      cursor: pointer;
+    &__statistics-buttons {
+      display: flex;
+
+      &__list-button {
+        padding: 5px;
+        font-size: 16px;
+        height: 50px;
+        width: 100px;
+        background-color: black;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -88,4 +92,11 @@
 input{
   color: white;
   background-color: black;
+}
+
+.active-button{
+  border-left: 2px solid rgb(148, 134, 134);
+  border-bottom: 2px solid rgb(148, 134, 134);
+  border-right: 2px solid rgb(148, 134, 134);
+  color: red;
 }
