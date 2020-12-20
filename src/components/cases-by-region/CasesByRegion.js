@@ -10,16 +10,27 @@ async function getGLobalCases() {
   const tabledata = [];
 
   for (let i = 0; i < content.Countries.length; i += 1) {
-    tabledata[i] = { name: `${content.Countries[i].Country}`, totalConfirmed: `${content.Countries[i].TotalConfirmed}` };
+    tabledata[i] = {
+      flags: `https://www.countryflags.io/${content.Countries[i].CountryCode}/shiny/24.png`,
+      name: `${content.Countries[i].Country}`,
+      totalConfirmed: `${content.Countries[i].TotalConfirmed}`,
+    };
   }
 
   totalStats.innerHTML = `${globalCases}`;
 
-  const table = new Tabulator('#table', {
-    height: '480px',
+  const table = new Tabulator('#cases__cases-by-region__table', {
+    height: '430px',
+    columnMaxWidth: 300,
     data: tabledata,
     layout: 'fitColumns',
     columns: [
+      {
+        field: 'flags',
+        width: '1%',
+        formatter: 'image',
+        headerSort: false,
+      },
       {
         title: 'Country',
         field: 'name',
@@ -29,7 +40,7 @@ async function getGLobalCases() {
       {
         title: 'Cases',
         field: 'totalConfirmed',
-        width: '43%',
+        width: '31%',
         sorter: 'number',
       },
     ],

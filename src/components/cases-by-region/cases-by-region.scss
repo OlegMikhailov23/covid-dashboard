@@ -1,12 +1,12 @@
 .cases {
   height: 100%;
-  width: 250px;
+  width: 300px;
 
   &__global-cases {
     height: 20%;
     background-color: rgb(14, 14, 29);
     width: 100%;
-    font-size: 28px;
+    font-size: 24px;
     text-align: center;
     padding: 20px;
 
@@ -20,7 +20,22 @@
     height: 80%;
     background-color: rgb(91, 89, 125);
     width: 100%;
+
+    &__test-button {
+      font-size: 16px;
+      height: 50px;
+      width: 100px;
+      background-color: black;
+      border: 1px solid red;
+      cursor: pointer;
+    }
   }
+}
+
+.flags{
+  position: relative;
+  top: 5px;
+  margin-right: 5px;
 }
 
 .tabulator{
@@ -31,6 +46,7 @@
 
 .tabulator-row .tabulator-cell{
   border: none;
+  height: 40px;
 }
 
 .tabulator .tabulator-header .tabulator-col{
@@ -67,4 +83,9 @@
   background-color: black;
   border-top: 1px solid red;
   border-bottom: 1px solid red;
+}
+
+input{
+  color: white;
+  background-color: black;
 }
