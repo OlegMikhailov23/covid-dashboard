@@ -4,7 +4,9 @@ import sayHi from './components/some-component/component';
 
 import getGLobalCases from './components/cases-by-region/CasesByRegion';
 
-getGLobalCases();
+import toggle from './components/cases-by-region/toggle';
+
+getGLobalCases().then(toggle);
 
 sayHi();
 // console.log('Hello Covid World!!!');
