@@ -1,6 +1,6 @@
 import './sass/style.scss';
 
-import sayHi from './components/some-component/component';
+import CanvasChart from './components/chart/chart';
 
-sayHi();
-// console.log('Hello Covid World!!!');
+const graph = new CanvasChart();
+graph.init();
