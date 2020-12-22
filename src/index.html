@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/tabulator-tables@4.9.1/dist/css/tabulator.min.css" rel="stylesheet">
   <title>Covid-dashboard</title>
 </head>
 <body>
@@ -18,9 +19,14 @@
       </div>
     </div>
     <div class="content">
-        <div class="content__table">Global Deaths
-          <div class="global-death-button button-death-and-recovered">deaths</div>
-          <div class="global-recovered-button button-death-and-recovered">recovered</div>
+        <div class="content__table">
+          <div class="content__table__data"></div>
+          <div class="content__table__switcher">
+            <div class="content__table__switcher__total active-button">Total</div>
+            <div class="content__table__switcher__last-day">New</div>
+            <div class="ccontent__table__switcher__per100-total">Total/100k</div>
+            <div class="content__table__switcher__per100-last-day">New/100k</div>
+          </div>
         </div>
         <div class="content__chart">Chart</div>
     </div>
