@@ -2,7 +2,7 @@
 @import '../../sass/mixin';
 
 #mapid {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 
 .popup .leaflet-popup-tip,
@@ -96,6 +96,95 @@
     background-color: $btn-bg-hover-color;
   }
 }
+.map__layout-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  padding-top: 30px;
+  background-color: $btn-bg;
+  top: 0;
+  right: 30px;
+  z-index: 500;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  cursor: auto;
+  & .map__layout-container__layout-button {
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: $third-font-color;
+    text-align: left;
+    font-size: 1.3rem;
+    padding-left: 50px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $btn-bg-hover-color;
+    }
+  }
+}
+
+.map__layout-container .map__layout-container__layout-button--active {
+  background-color: $btn-bg-hover-color;
+}
+
+.map__layout-container__layout-button::before {
+  @include pseudo();
+  top: 0;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  border: 1px solid $disabled-border;
+}
+
+.map__layout-container__layout-button:nth-child(2)::before {
+  background-image: url("../assets/img/dark.png");
+}
+
+.map__layout-container__layout-button:nth-child(3)::before {
+  background-image: url("../assets/img/bright.png");
+}
+
+.map__layout-container__layout-button:nth-child(4)::before {
+  background-image: url("../assets/img/middle.png");
+}
+
+.map__layout-container__layout-button:nth-child(5)::before {
+  background-image: url("../assets/img/landscape.png");
+}
+
+.map__layout-container__action-button {
+  @include pseudo();
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  background-image: url("../assets/img/list.svg");
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: $btn-bg-hover-color;
+  }
+}
+
+.show-layout-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 200px;
+  overflow: visible;
+  transform: translateX(-5px);
+}
+
 
 .map__tabs-wrapper__tab--active {
   border-bottom: 3px solid #ed4679;
@@ -111,10 +200,14 @@
   right: 0;
   background-image: url("../assets/img/full-screen-selector.svg");
   background-repeat: no-repeat;
-  background-size: 80% 80%;
+  background-size: 70% 70%;
   background-position: center;
+  border: none;
   cursor: pointer;
   z-index: 500;
+  &:hover {
+    background-color: $btn-bg-hover-color;
+  }
 }
 
 .to-full-screen {
