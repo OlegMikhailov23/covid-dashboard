@@ -46,6 +46,14 @@ const createTodayPopup = (name, cases, deaths, recovered, flagSrc, date) => (`
     </div>
     `);
 
+const showLayer = () => {
+  const layerContainer = document.querySelector('.map__layout-container');
+  const layerButton = document.querySelector('.map__layout-container__action-button');
+  layerButton.addEventListener('click', () => {
+    layerContainer.classList.toggle('show-layout-container');
+  });
+};
+
 const removeMarker = () => {
   document.querySelectorAll('.pulse').forEach((it) => {
     it.remove();
@@ -54,17 +62,22 @@ const removeMarker = () => {
 
 const addZero = (numb) => (parseInt(numb, 10) < 10 ? '0' : '') + numb;
 
-const activateTab = (obj) => {
-  const tabs = document.querySelectorAll('.map__tabs-wrapper__tab');
-  tabs.forEach((it) => {
-    it.classList.remove('map__tabs-wrapper__tab--active');
+const activateTab = (obj, all, toAdd) => {
+  document.querySelectorAll(all).forEach((it) => {
+    it.classList.remove(toAdd);
   });
-  obj.classList.add('map__tabs-wrapper__tab--active');
+  obj.classList.add(toAdd);
 };
 
 class Map {
   constructor(layout) {
     this.layout = layout;
+    this.theme = {
+      dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+      bright: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
+      mid: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
+      land: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+    };
 
     this.today = new Date();
     this.date = this.today.getDate();
@@ -77,6 +90,7 @@ class Map {
     this.intensityRadCoefficient = 1800;
     this.intensityOpacityCoefficient = 0.01;
     this.incedenceCoefficient = 2;
+    this.todayDeathsCoefficient = 0.4;
 
     this.maxTileArea = [
       [85, -180],
@@ -96,7 +110,7 @@ class Map {
 
   addLayout() {
     // eslint-disable-next-line no-undef
-    L.tileLayer(this.layout, {
+    this.currentLayout = L.tileLayer(this.layout, {
       maxZoom: 10,
     }).addTo(this.map);
   }
@@ -148,7 +162,8 @@ class Map {
         this.showPopup(createIncidenceRatePopup(countryName, perThousand, flag));
       }
       if (this.screen === 'today') {
-        this.putPoint(lat, long, this.todayColor, this.todayFillColor, todayDeaths, todayDeaths);
+        this.putPoint(lat, long, this.todayColor, this.todayFillColor,
+          todayDeaths * 0.1, todayDeaths * this.todayDeathsCoefficient);
         this.showPopup(createTodayPopup(countryName, todayCases,
           todayDeaths, todayRecovered, flag, this.fullDate));
       }
@@ -164,18 +179,30 @@ class Map {
     });
   }
 
+  changeLayout(layout) {
+    this.map.removeLayer(this.currentLayout);
+    this.layout = this.theme[layout];
+    this.addLayout();
+  }
+
   init(countries) {
     this.screen = 'total';
     this.addLayout();
     this.fitBounds();
     this.renderMarker(countries);
     this.toFullScreen();
+    showLayer();
     document.addEventListener('click', (e) => {
       if (e.target.hasAttribute('mapId')) {
-        activateTab(e.target);
+        activateTab(e.target, '.map__tabs-wrapper__tab', 'map__tabs-wrapper__tab--active');
         removeMarker();
         this.screen = e.target.getAttribute('mapId');
         this.renderMarker(countries);
+      }
+      if (e.target.hasAttribute('idLayout')) {
+        activateTab(e.target, '.map__layout-container__layout-button', 'map__layout-container__layout-button--active');
+        const target = e.target.getAttribute('idLayout');
+        this.changeLayout(target);
       }
     });
   }
