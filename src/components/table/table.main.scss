@@ -18,9 +18,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: black;
+
+    div {
+      border: 2px solid white;
+    }
 
     div:hover {
       cursor: pointer;
+      color: yellow;
     }
   }
 
@@ -69,6 +75,7 @@
     background-color: black;
     border-top: 1px solid red;
     border-bottom: 1px solid red;
+    color: yellow;
   }
 
   input{
