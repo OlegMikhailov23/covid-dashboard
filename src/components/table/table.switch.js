@@ -13,7 +13,7 @@ const requestOptions = {
 const buildNewTable = (data) => {
   const tabledata = [];
 
-  for (let i = 0; i < data.Cointries.length; i += 1) {
+  for (let i = 0; i < data.Countries.length; i += 1) {
     tabledata[i] = {
       name: `${data.Countries[i].Country}`,
       newConfirmed: `${data.Countries[i].NewConfirmed}`,

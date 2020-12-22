@@ -8,4 +8,6 @@ import toggle from './components/table/table.switch';
 
 sayHi();
 
-getData().then(toggle);
+getData();
+
+toggle();
