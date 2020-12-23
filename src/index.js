@@ -1,6 +1,10 @@
 import './sass/style.scss';
 import './components/table/table.main.scss';
 
+import CanvasChart from './components/chart/chart';
+
+const graph = new CanvasChart();
+
 import getGLobalCases from './components/cases-by-region/CasesByRegion';
 
 import getData from './components/table/table.main';
@@ -14,3 +18,5 @@ getGLobalCases().then(toggle);
 initMap('https://disease.sh/v3/covid-19/countries');
 
 getData();
+
+graph.init();
