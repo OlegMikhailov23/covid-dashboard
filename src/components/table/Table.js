@@ -65,7 +65,7 @@ export default class Table {
     } else {
       for (let i = 0; i < this.data.Countries.length; i += 1) {
         let people = null;
-        
+
         for (let j = 0; j < this.population.length; j += 1) {
           if (this.data.Countries[i].Country === this.population[j].name) {
             people = this.population[j].population;
