@@ -20,3 +20,4 @@ getData();
 const graph = new CanvasChart();
 
 graph.init();
+

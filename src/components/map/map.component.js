@@ -73,10 +73,10 @@ class Map {
   constructor(layout) {
     this.layout = layout;
     this.theme = {
-      dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-      bright: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
-      mid: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-      land: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+      dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
+      bright: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
+      mid: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
+      land: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
     };
 
     this.today = new Date();
