@@ -1,3 +1,5 @@
+import { getCurrentCountry } from './toggle';
+
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
@@ -47,6 +49,8 @@ async function getGLobalCases() {
   });
 
   document.querySelector('input').placeholder = 'Search';
+
+  getCurrentCountry();
 
   return table;
 }

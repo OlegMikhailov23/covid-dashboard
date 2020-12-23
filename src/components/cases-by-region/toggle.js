@@ -2,6 +2,15 @@ let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
 
+export function getCurrentCountry() {
+  const list = document.querySelector('.tabulator-tableHolder');
+  list.addEventListener('click', (e) => {
+    const row = e.target.parentNode;
+    const currentCountry = row.children[1].textContent;
+    return currentCountry;
+  });
+}
+
 async function getNewConfirmedCases() {
   const response = await fetch('https://api.covid19api.com/summary');
   const content = await response.json();
@@ -43,6 +52,8 @@ async function getNewConfirmedCases() {
   });
 
   document.querySelector('input').placeholder = 'Search';
+
+  getCurrentCountry();
 
   return table;
 }
@@ -93,6 +104,8 @@ async function getGLobalCases() {
 
   document.querySelector('input').placeholder = 'Search';
 
+  getCurrentCountry();
+
   return table;
 }
 
@@ -104,13 +117,18 @@ async function getPer100ThosandCases() {
   const globalCases = content.Global.TotalConfirmed;
   const totalStats = document.querySelector('.cases__global-cases__total-cases');
   const tabledata = [];
+  const removeBrackets = (str) => str.split('(')[0].trim();
 
   for (let i = 0; i < content.Countries.length; i += 1) {
-    tabledata[i] = {
-      flags: `https://www.countryflags.io/${content.Countries[i].CountryCode}/shiny/24.png`,
-      name: `${content.Countries[i].Country}`,
-      per100Thousend: `${Math.round((content.Countries[i].TotalConfirmed * 100000) / population[i].population)}`,
-    };
+    for (let j = 0; j < population.length; j += 1) {
+      if (removeBrackets(content.Countries[i].Country) === removeBrackets(population[j].name)) {
+        tabledata[i] = {
+          flags: `https://www.countryflags.io/${content.Countries[i].CountryCode}/shiny/24.png`,
+          name: `${content.Countries[i].Country}`,
+          per100Thousend: `${Math.round((content.Countries[i].TotalConfirmed * 100000) / population[j].population)}`,
+        };
+      }
+    }
   }
 
   totalStats.innerHTML = `${globalCases}`;
@@ -143,6 +161,8 @@ async function getPer100ThosandCases() {
   });
 
   document.querySelector('input').placeholder = 'Search';
+
+  getCurrentCountry();
 
   return table;
 }

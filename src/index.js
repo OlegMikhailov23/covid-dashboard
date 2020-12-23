@@ -9,4 +9,3 @@ import toggle from './components/cases-by-region/toggle';
 getGLobalCases().then(toggle);
 
 sayHi();
-// console.log('Hello Covid World!!!');
