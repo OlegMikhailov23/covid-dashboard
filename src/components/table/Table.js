@@ -52,7 +52,6 @@ export default class Table {
 
   switchWindow(isPer100, confirmend, deaths, recovered) {
     const tabledata = [];
-    const people = [];
 
     if (!isPer100) {
       for (let i = 0; i < this.data.Countries.length; i += 1) {
@@ -65,20 +64,22 @@ export default class Table {
       }
     } else {
       for (let i = 0; i < this.data.Countries.length; i += 1) {
+        let people = 1;
+        
         for (let j = 0; j < this.population.length; j += 1) {
           if (this.data.Countries[i].Country === this.population[j].name) {
-            people.push(this.population[j].population);
+            people = this.population[j].population;
+
+            tabledata[i] = {
+              name: `${this.data.Countries[i].Country}`,
+              totalConfirmed: `${Math.round((this.data.Countries[i][confirmend] * 100000) / people)}`,
+              totalDeaths: `${Math.round((this.data.Countries[i][deaths] * 100000) / people)}`,
+              totalRecovered: `${Math.round((this.data.Countries[i][recovered] * 100000) / people)}`,
+            };
           }
         }
-
-        tabledata[i] = {
-          name: `${this.data.Countries[i].Country}`,
-          totalConfirmed: `${Math.round((this.data.Countries[i][confirmend] * 100000) / people[i])}`,
-          totalDeaths: `${Math.round((this.data.Countries[i][deaths] * 100000) / people[i])}`,
-          totalRecovered: `${Math.round((this.data.Countries[i][recovered] * 100000) / people[i])}`,
-        };
+        console.log(people);
       }
-      console.log(people);
     }
 
     const table = new Tabulator('.content__table__data', {
