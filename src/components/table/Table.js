@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
