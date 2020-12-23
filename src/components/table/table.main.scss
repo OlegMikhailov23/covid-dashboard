@@ -1,0 +1,92 @@
+.content__table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & * {
+    font-size: 14px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__data {
+
+  }
+
+  &__switcher {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+
+    div {
+      border: 2px solid white;
+    }
+
+    div:hover {
+      cursor: pointer;
+      color: yellow;
+    }
+  }
+
+  .tabulator{
+    overflow-x:hidden;
+    font-size: 18px;
+    border: none;
+  }
+
+  .tabulator-row .tabulator-cell{
+    border: none;
+    height: 40px;
+  }
+
+  .tabulator .tabulator-header .tabulator-col{
+    background: black;
+    border: none;
+  }
+
+  .tabulator .tabulator-header{
+    color: white;
+    background-color: black;
+    border: none;
+  }
+
+  .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover{
+    color: white;
+    background-color: black;
+  }
+
+  .tabulator .tabulator-tableHolder{
+    background-color: black;
+  }
+
+  .tabulator-row-odd{
+    color: white;
+    background-color: black;
+  }
+
+  .tabulator-row.tabulator-row-even{
+    color: white;
+    background-color: black;
+  }
+
+  .tabulator-row.tabulator-selectable:hover{
+    background-color: black;
+    border-top: 1px solid red;
+    border-bottom: 1px solid red;
+    color: yellow;
+  }
+
+  input{
+    color: white;
+    background-color: black;
+  }
+
+  .active-button{
+    border-left: 2px solid rgb(148, 134, 134);
+    border-bottom: 2px solid rgb(148, 134, 134);
+    border-right: 2px solid rgb(148, 134, 134);
+    color: red;
+  }
+}
