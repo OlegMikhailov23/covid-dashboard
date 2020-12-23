@@ -1,6 +1,5 @@
 import './sass/style.scss';
 
-import sayHi from './components/some-component/component';
+import initMap from './components/map/mapInit.component';
 
-sayHi();
-// console.log('Hello Covid World!!!');
+initMap('https://disease.sh/v3/covid-19/countries');
