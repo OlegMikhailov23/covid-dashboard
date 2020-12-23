@@ -96,8 +96,41 @@ class CanvasChart {
         sortedArr.forEach((v, i, arr) => {
           if (i > 0) {
             copy[i] = arr[i] - arr[i - 1];
-            console.log('copy', copy[i], 'i', i);
-            console.log('arr[i]', arr[i], 'arr[i-1]', arr[i - 1]);
+          }
+        });
+        copy.shift();
+        this.configedChart.destroy();
+        this.createBarGraph(copy,
+          dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
+          title);
+      });
+  }
+
+  relativeOverallRequest(url, key, title) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        const coefficient = 7600000000 / 100000;
+        const dataArr = result.sort((a, b) => a[key] - b[key]);
+        const sortedArr = dataArr.map((a) => Math.floor(a[key] / coefficient));
+        this.configedChart.destroy();
+        this.createBarGraph(sortedArr,
+          dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
+          title);
+      });
+  }
+
+  relativeDailyRequest(url, key, title) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        const coefficient = 7600000000 / 100000;
+        const dataArr = result.sort((a, b) => a[key] - b[key]);
+        const sortedArr = dataArr.map((a) => Math.floor(a[key] / coefficient));
+        const copy = [].concat(sortedArr);
+        sortedArr.forEach((v, i, arr) => {
+          if (i > 0) {
+            copy[i] = arr[i] - arr[i - 1];
           }
         });
         copy.shift();
@@ -131,22 +164,22 @@ class CanvasChart {
           this.dailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
           break;
         case 'relative-overall-cases':
-          console.log('relative-overall-cases');
+          this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
           break;
         case 'relative-overall-deaths':
-          console.log('relative-overall-deaths');
+          this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
           break;
         case 'relative-overall-recovered':
-          console.log('relative-overall-recovered');
+          this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
           break;
         case 'relative-daily-cases':
-          console.log('relative-daily-cases');
+          this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
           break;
         case 'relative-daily-deaths':
-          console.log('relative-daily-d');
+          this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
           break;
         case 'relative-daily-recovered':
-          console.log('relative-daily-r');
+          this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
           break;
         default:
           break;
