@@ -22,7 +22,6 @@ async function getGLobalCases() {
   totalStats.innerHTML = `${globalCases}`;
 
   const table = new Tabulator('#cases__cases-by-region__table', {
-    height: '430px',
     columnMaxWidth: 300,
     data: tabledata,
     layout: 'fitColumns',

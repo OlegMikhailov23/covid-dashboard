@@ -83,7 +83,6 @@ export default class Table {
     }
 
     const table = new Tabulator('.content__table__data', {
-      height: '430px',
       columnMaxWidth: 300,
       data: tabledata,
       layout: 'fitColumns',
