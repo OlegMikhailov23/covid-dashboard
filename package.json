@@ -58,6 +58,6 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "tabulator-tables": "^4.9.1"
+    "tabulator-tables": "^4.9.3"
   }
 }
