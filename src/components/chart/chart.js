@@ -27,6 +27,7 @@ class CanvasChart {
         }],
       },
       options: {
+        responsive: true,
         tooltips: {
           callbacks: {
             title: (tt) => tt[0].xLabel.slice(0, -12),
@@ -52,6 +53,7 @@ class CanvasChart {
               min: 0,
               callback: (value) => {
                 if (value > 999999) return `${String(value).slice(0, -6)}m`;
+                if (value > 99999) return `${String(value).slice(0, -3)}k`;
                 return String(value);
               },
             },
