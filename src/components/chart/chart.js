@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-function getTodayDate(before) {
+function getDayOfStat(before) {
   const date = new Date();
   date.setDate(date.getDate() - before);
   return date;
@@ -12,10 +12,10 @@ class CanvasChart {
   }
 
   init() {
-    this.request();
+    this.firstRequest('https://api.covid19api.com/world');
   }
 
-  createBarGraph(data, labels, place) {
+  createBarGraph(data, labels, place = 'World') {
     this.configedChart = new Chart(this.ctx, {
       type: 'bar',
       data: {
@@ -29,7 +29,7 @@ class CanvasChart {
       options: {
         tooltips: {
           callbacks: {
-            title: (tt) => tt[0].xLabel.slice(0, -13),
+            title: (tt) => tt[0].xLabel.slice(0, -12),
           },
         },
         legend: {
@@ -61,20 +61,75 @@ class CanvasChart {
     });
   }
 
-  request() {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-
-    fetch('https://api.covid19api.com/world', requestOptions)
-      .then((response) => response.text())
+  firstRequest(url, key = 'TotalConfirmed') {
+    fetch(url)
+      .then((response) => response.json())
       .then((result) => {
-        this.worldJSON = JSON.parse(result).sort((a, b) => a.TotalConfirmed - b.TotalConfirmed);
-        this.worldTotalConfirmed = this.worldJSON.map((a) => a.TotalConfirmed);
-        this.createBarGraph(this.worldTotalConfirmed, this.worldJSON.map((v, i, arr) => getTodayDate((arr.length - i - 1))), 'World');
+        const dataArr = result.sort((a, b) => a[key] - b[key]);
+        const sortedArr = dataArr.map((a) => a[key]);
+        this.createBarGraph(sortedArr, dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))), 'World');
+        this.makeNewGraph();
       })
-      .catch((error) => console.log('error', error));
+      .catch((err) => console.error(err));
+  }
+
+  nextRequest(url, key, country) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        const dataArr = result.sort((a, b) => a[key] - b[key]);
+        const sortedArr = dataArr.map((a) => a[key]);
+        this.configedChart.destroy();
+        this.createBarGraph(sortedArr,
+          dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
+          country);
+      });
+  }
+
+  makeNewGraph() {
+    document.querySelector('.chart__select').addEventListener('change', (v) => {
+      // Need to be refactor
+      switch (v.target.value) {
+        case 'overall-cases':
+          this.nextRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          break;
+        case 'overall-deaths':
+          this.nextRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          break;
+        case 'overall-recovered':
+          this.nextRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          break;
+        case 'daily-cases':
+          console.log('daily-cases');
+          break;
+        case 'daily-deaths':
+          console.log('daily-deaths');
+          break;
+        case 'daily-recovered':
+          console.log('daily-recovered');
+          break;
+        case 'relative-overall-cases':
+          console.log('relative-overall-cases');
+          break;
+        case 'relative-overall-deaths':
+          console.log('relative-overall-deaths');
+          break;
+        case 'relative-overall-recovered':
+          console.log('relative-overall-recovered');
+          break;
+        case 'relative-daily-cases':
+          console.log('relative-daily-cases');
+          break;
+        case 'relative-daily-deaths':
+          console.log('relative-daily-d');
+          break;
+        case 'relative-daily-recovered':
+          console.log('relative-daily-r');
+          break;
+        default:
+          break;
+      }
+    });
   }
 }
 

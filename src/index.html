@@ -22,8 +22,25 @@
           <div class="global-death-button button-death-and-recovered">deaths</div>
           <div class="global-recovered-button button-death-and-recovered">recovered</div>
         </div>
-        <div class="content__chart">
-          <canvas id="graph" class="chart"></canvas>
+        <div class="content__chart chart">
+          <div class="chart__wrap-graph">
+            <canvas id="graph" class="chart__graph"></canvas>
+          </div>
+
+          <select name="chart__select" id="chart__select" class="chart__select">
+            <option value="overall-cases">Overall cases</option>
+            <option value="overall-deaths">Overall deaths</option>
+            <option value="overall-recovered">Overall recovered</option>
+            <option value="daily-cases">Daily cases</option>
+            <option value="daily-deaths">Daily deaths</option>
+            <option value="daily-recovered">Daily recovered</option>
+            <option value="relative-overall-cases">Relative to 100k overall cases</option>
+            <option value="relative-overall-deaths">Relative to 100k overall deaths</option>
+            <option value="relative-overall-recovered">Relative to 100k overall recovered</option>
+            <option value="relative-daily-cases">Relative to 100k daily cases</option>
+            <option value="relative-daily-deaths">Relative to 100k daily deaths</option>
+            <option value="relative-daily-recovered">Relative to 100k daily recovered</option>
+          </select>
         </div>
     </div>
   </div>
