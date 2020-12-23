@@ -1,0 +1,6 @@
+.idea
+*.sublime*
+.vscode
+
+node_modules/
+
