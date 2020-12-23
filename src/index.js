@@ -1,5 +1,4 @@
 import './sass/style.scss';
-import './components/table/table.main.scss';
 
 import CanvasChart from './components/chart/chart';
 
