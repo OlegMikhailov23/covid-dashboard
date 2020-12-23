@@ -73,7 +73,7 @@ class CanvasChart {
       .catch((err) => console.error(err));
   }
 
-  nextRequest(url, key, country) {
+  overallRequest(url, key, title) {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
@@ -82,7 +82,29 @@ class CanvasChart {
         this.configedChart.destroy();
         this.createBarGraph(sortedArr,
           dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
-          country);
+          title);
+      });
+  }
+
+  dailyRequest(url, key, title) {
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        const dataArr = result.sort((a, b) => a[key] - b[key]);
+        const sortedArr = dataArr.map((a) => a[key]);
+        const copy = [].concat(sortedArr);
+        sortedArr.forEach((v, i, arr) => {
+          if (i > 0) {
+            copy[i] = arr[i] - arr[i - 1];
+            console.log('copy', copy[i], 'i', i);
+            console.log('arr[i]', arr[i], 'arr[i-1]', arr[i - 1]);
+          }
+        });
+        copy.shift();
+        this.configedChart.destroy();
+        this.createBarGraph(copy,
+          dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
+          title);
       });
   }
 
@@ -91,22 +113,22 @@ class CanvasChart {
       // Need to be refactor
       switch (v.target.value) {
         case 'overall-cases':
-          this.nextRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          this.overallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
           break;
         case 'overall-deaths':
-          this.nextRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          this.overallRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
           break;
         case 'overall-recovered':
-          this.nextRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          this.overallRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
           break;
         case 'daily-cases':
-          console.log('daily-cases');
+          this.dailyRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
           break;
         case 'daily-deaths':
-          console.log('daily-deaths');
+          this.dailyRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
           break;
         case 'daily-recovered':
-          console.log('daily-recovered');
+          this.dailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
           break;
         case 'relative-overall-cases':
           console.log('relative-overall-cases');
