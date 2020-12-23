@@ -8,7 +8,7 @@ async function initMap(url) {
   const response = await fetch(url, requestOptions);
   const data = await response.json();
   const countries = data;
-  const map = new Map('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png');
+  const map = new Map('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5');
   map.init(countries);
 }
 
