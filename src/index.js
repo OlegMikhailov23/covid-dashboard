@@ -3,8 +3,6 @@ import './components/table/table.main.scss';
 
 import CanvasChart from './components/chart/chart';
 
-const graph = new CanvasChart();
-
 import getGLobalCases from './components/cases-by-region/CasesByRegion';
 
 import getData from './components/table/table.main';
@@ -12,6 +10,8 @@ import getData from './components/table/table.main';
 import toggle from './components/cases-by-region/toggle';
 
 import initMap from './components/map/mapInit.component';
+
+const graph = new CanvasChart();
 
 getGLobalCases().then(toggle);
 

@@ -69,8 +69,8 @@ class CanvasChart {
         const sortedArr = dataArr.map((a) => a[key]);
         this.createBarGraph(sortedArr, dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))), 'World');
         this.makeNewGraph();
-      })
-      .catch((err) => console.error(err));
+      });
+    // .catch((err) => console.error(err));
   }
 
   overallRequest(url, key, title) {
