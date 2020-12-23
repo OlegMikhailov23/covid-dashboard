@@ -64,7 +64,7 @@ export default class Table {
       }
     } else {
       for (let i = 0; i < this.data.Countries.length; i += 1) {
-        let people = 1;
+        let people = null;
         
         for (let j = 0; j < this.population.length; j += 1) {
           if (this.data.Countries[i].Country === this.population[j].name) {
@@ -72,9 +72,9 @@ export default class Table {
 
             tabledata[i] = {
               name: `${this.data.Countries[i].Country}`,
-              totalConfirmed: `${Math.round((this.data.Countries[i][confirmend] * 100000) / people)}`,
-              totalDeaths: `${Math.round((this.data.Countries[i][deaths] * 100000) / people)}`,
-              totalRecovered: `${Math.round((this.data.Countries[i][recovered] * 100000) / people)}`,
+              totalConfirmed: `${((this.data.Countries[i][confirmend] * 100000) / people).toFixed(4)}`,
+              totalDeaths: `${((this.data.Countries[i][deaths] * 100000) / people).toFixed(4)}`,
+              totalRecovered: `${((this.data.Countries[i][recovered] * 100000) / people).toFixed(4)}`,
             };
           }
         }
