@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2acfdb52-6bf4-447f-9b8c-703165b4663c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/map/mapInit.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/mapInit.component.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1lh8RCG9DLBKWYbakSlt7h1Phy5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2acfdb52-6bf4-447f-9b8c-703165b4663c" name="Default Changelist" comment="" />
+      <created>1608037956591</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608037956591</updated>
+      <workItem from="1608037960791" duration="4882000" />
+      <workItem from="1608051966221" duration="1281000" />
+      <workItem from="1608147134018" duration="26494000" />
+      <workItem from="1608488467274" duration="24985000" />
+      <workItem from="1608660543161" duration="10630000" />
+      <workItem from="1608672692569" duration="274000" />
+      <workItem from="1608735793501" duration="5210000" />
+      <workItem from="1608748104331" duration="56000" />
+      <workItem from="1608748165493" duration="466000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1899" height="305" key="GridCell.Tab.0.bottom" timestamp="1608239037508">
+      <screen x="1440" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1899" height="305" key="GridCell.Tab.0.bottom/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608147481122" />
+    <state width="1899" height="305" key="GridCell.Tab.0.bottom/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608239037508" />
+    <state width="1899" height="305" key="GridCell.Tab.0.center" timestamp="1608239037504">
+      <screen x="1440" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1899" height="305" key="GridCell.Tab.0.center/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608147481119" />
+    <state width="1899" height="305" key="GridCell.Tab.0.center/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608239037504" />
+    <state width="1899" height="305" key="GridCell.Tab.0.left" timestamp="1608239037494">
+      <screen x="1440" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1899" height="305" key="GridCell.Tab.0.left/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608147481117" />
+    <state width="1899" height="305" key="GridCell.Tab.0.left/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608239037494" />
+    <state width="1899" height="305" key="GridCell.Tab.0.right" timestamp="1608239037506">
+      <screen x="1440" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1899" height="305" key="GridCell.Tab.0.right/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608147481120" />
+    <state width="1899" height="305" key="GridCell.Tab.0.right/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608239037506" />
+    <state x="1909" y="190" key="SettingsEditor" timestamp="1608749970390">
+      <screen x="1440" y="23" width="1920" height="1005" />
+    </state>
+    <state x="1909" y="179" key="SettingsEditor/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608238312049" />
+    <state x="1909" y="190" key="SettingsEditor/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608749970390" />
+    <state x="2065" y="241" width="670" height="676" key="search.everywhere.popup" timestamp="1608155649055">
+      <screen x="1440" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2065" y="241" width="670" height="676" key="search.everywhere.popup/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608155649055" />
+  </component>
+</project>
