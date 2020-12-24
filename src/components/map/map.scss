@@ -12,6 +12,8 @@
   border-radius: 0;
   min-width: 210px;
   border: 1px solid #cc22f1;
+  color: #cdcdcd;
+  font-size: 1.2rem;
   & .map__country-name {
     color: $third-font-color;
     padding-bottom: 15px;
@@ -210,6 +212,11 @@
   }
 }
 
+.marker {
+  z-index: 0;
+  animation: pulsate 3s infinite;
+}
+
 .to-full-screen {
   top: 0 !important;
   right: 0 !important;
@@ -218,8 +225,8 @@
   height: 100% !important;
 }
 
-@keyframes pulsate {
-  0% {opacity: 0.4;}
-  70% {opacity: 1.0;}
-  100% {opacity: 0.4;}
-}
+//@keyframes pulsate {
+//  0% {opacity: 0.4;}
+//  70% {opacity: 1.0;}
+//  100% {opacity: 0.4;}
+//}

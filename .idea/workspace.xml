@@ -20,7 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2acfdb52-6bf4-447f-9b8c-703165b4663c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cases-by-region/toggle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cases-by-region/toggle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/map/map.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/map.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/map/map.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/map.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/map/mapInit.component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/map/mapInit.component.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sass/mixin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/sass/mixin.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +46,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editorconfig.notification" value="clrf" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -47,7 +55,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -66,6 +74,8 @@
       <workItem from="1608735793501" duration="5210000" />
       <workItem from="1608748104331" duration="56000" />
       <workItem from="1608748165493" duration="466000" />
+      <workItem from="1608799288072" duration="679000" />
+      <workItem from="1608800839425" duration="6640000" />
     </task>
     <servers />
   </component>
@@ -105,10 +115,10 @@
     </state>
     <state width="1899" height="305" key="GridCell.Tab.0.right/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608147481120" />
     <state width="1899" height="305" key="GridCell.Tab.0.right/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608239037506" />
-    <state x="1909" y="190" key="SettingsEditor" timestamp="1608749970390">
-      <screen x="1440" y="23" width="1920" height="1005" />
+    <state x="1909" y="179" key="SettingsEditor" timestamp="1608834564415">
+      <screen x="1440" y="0" width="1920" height="1080" />
     </state>
-    <state x="1909" y="179" key="SettingsEditor/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608238312049" />
+    <state x="1909" y="179" key="SettingsEditor/1440.0.1920.1080/0.0.1440.900@1440.0.1920.1080" timestamp="1608834564415" />
     <state x="1909" y="190" key="SettingsEditor/1440.23.1920.1005/0.23.1440.877@1440.23.1920.1005" timestamp="1608749970390" />
     <state x="2065" y="241" width="670" height="676" key="search.everywhere.popup" timestamp="1608155649055">
       <screen x="1440" y="0" width="1920" height="1080" />
