@@ -77,7 +77,7 @@ export default class Table {
             };
           }
         }
-        console.log(people);
+        // console.log(people);
       }
     }
 
