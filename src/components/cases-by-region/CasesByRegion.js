@@ -45,15 +45,15 @@ async function getGLobalCases() {
         sorter: 'number',
       },
     ],
-    /* rowClick: function(i, index) {
-      let rows = document.querySelectorAll('.tabulator-row');
-      for(let i = 0; i < rows.length; i += 1){
-        rows[i].classList.remove('select-row')
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
       }
-      let currentRow = index._row.element;
       currentRow.classList.add('select-row');
-      console.log(index._row.element.classList)
-    } */
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';
