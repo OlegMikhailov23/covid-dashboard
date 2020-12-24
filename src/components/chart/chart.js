@@ -9,6 +9,8 @@ function getDayOfStat(before) {
 class CanvasChart {
   constructor() {
     this.ctx = document.getElementById('graph').getContext('2d');
+    this.country = 'global';
+    this.select = document.querySelector('.chart__select');
   }
 
   init() {
@@ -71,8 +73,7 @@ class CanvasChart {
         const sortedArr = dataArr.map((a) => a[key]);
         this.createBarGraph(sortedArr, dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))), 'World');
         this.makeNewGraph();
-      })
-      .catch((err) => console.error(err));
+      });
   }
 
   overallRequest(url, key, title) {
@@ -143,45 +144,180 @@ class CanvasChart {
       });
   }
 
+  overallCountryRequest(country) {
+    this.country = country;
+    let url;
+    switch (this.select.value) {
+      case 'overall-cases':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/confirmed`;
+        break;
+      case 'overall-deaths':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/deaths`;
+        break;
+      case 'overall-recovered':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/recovered`;
+        break;
+      default:
+        break;
+    }
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        const cases = result.map((v) => v.Cases);
+        const dates = result.map((v) => new Date(v.Date));
+        this.configedChart.destroy();
+        this.createBarGraph(cases, dates, country);
+      });
+  }
+
+  dailyCountryRequest(country) {
+    this.country = country;
+    let url;
+    switch (this.select.value) {
+      case 'daily-cases':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/confirmed`;
+        break;
+      case 'daily-deaths':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/deaths`;
+        break;
+      case 'daily-recovered':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/recovered`;
+        break;
+      default:
+        break;
+    }
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        const cases = result.map((v) => v.Cases);
+        const dates = result.map((v) => new Date(v.Date));
+        const copy = [].concat(cases);
+        cases.forEach((v, i, arr) => {
+          if (i > 0) {
+            copy[i] = arr[i] - arr[i - 1];
+          }
+        });
+        copy.shift();
+        this.configedChart.destroy();
+        this.createBarGraph(copy, dates, country);
+      });
+  }
+
+  relativeOverallCountryRequest(country) {
+    this.country = country;
+    let url;
+    switch (this.select.value) {
+      case 'relative-overall-cases':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/confirmed`;
+        break;
+      case 'relative-overall-deaths':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/deaths`;
+        break;
+      case 'relative-overall-recovered':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/recovered`;
+        break;
+      default:
+        break;
+    }
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        // POPULATION NEED TO GET POPULATION FOR SPECIAL COUNTRY
+        // const coefficient = POPULATION / 100000;
+        const cases = result.map((v) => Math.floor(v.Cases / 577.8));
+        const dates = result.map((v) => new Date(v.Date));
+        this.configedChart.destroy();
+        this.createBarGraph(cases, dates, country);
+      });
+  }
+
+  relativeDailyCountryRequest(country) {
+    this.country = country;
+    let url;
+    switch (this.select.value) {
+      case 'relative-daily-cases':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/confirmed`;
+        break;
+      case 'relative-daily-deaths':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/deaths`;
+        break;
+      case 'relative-daily-recovered':
+        url = `https://api.covid19api.com/dayone/country/${country}/status/recovered`;
+        break;
+      default:
+        break;
+    }
+    fetch(url)
+      .then((response) => response.json())
+      .then((result) => {
+        // POPULATION NEED TO GET POPULATION FOR SPECIAL COUNTRY
+        // const coefficient = POPULATION / 100000;
+        const cases = result.map((v) => Math.floor(v.Cases / 577.8));
+        const dates = result.map((v) => new Date(v.Date));
+        const copy = [].concat(cases);
+        cases.forEach((v, i, arr) => {
+          if (i > 0) {
+            copy[i] = arr[i] - arr[i - 1];
+          }
+        });
+        copy.shift();
+        this.configedChart.destroy();
+        this.createBarGraph(copy, dates, country);
+      });
+  }
+
   makeNewGraph() {
-    document.querySelector('.chart__select').addEventListener('change', (v) => {
+    this.select.addEventListener('change', (v) => {
       // Need to be refactor
+      // !!! check for country or world
       switch (v.target.value) {
         case 'overall-cases':
-          this.overallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          if (this.country === 'global') this.overallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          else this.overallCountryRequest(this.country);
           break;
         case 'overall-deaths':
-          this.overallRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          if (this.country === 'global') this.overallRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          else this.overallCountryRequest(this.country);
           break;
         case 'overall-recovered':
-          this.overallRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          if (this.country === 'global') this.overallRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          else this.overallCountryRequest(this.country);
           break;
         case 'daily-cases':
-          this.dailyRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          if (this.country === 'global') this.dailyRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          else this.dailyCountryRequest(this.country);
           break;
         case 'daily-deaths':
-          this.dailyRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          if (this.country === 'global') this.dailyRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          else this.dailyCountryRequest(this.country);
           break;
         case 'daily-recovered':
-          this.dailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          if (this.country === 'global') this.dailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          else this.dailyCountryRequest(this.country);
           break;
         case 'relative-overall-cases':
-          this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          if (this.country === 'global') this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          else this.relativeOverallCountryRequest(this.country);
           break;
         case 'relative-overall-deaths':
-          this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          if (this.country === 'global') this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          else this.relativeOverallCountryRequest(this.country);
           break;
         case 'relative-overall-recovered':
-          this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          if (this.country === 'global') this.relativeOverallRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          else this.relativeOverallCountryRequest(this.country);
           break;
         case 'relative-daily-cases':
-          this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          if (this.country === 'global') this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
+          else this.relativeDailyCountryRequest(this.country);
           break;
         case 'relative-daily-deaths':
-          this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          if (this.country === 'global') this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalDeaths', 'World');
+          else this.relativeDailyCountryRequest(this.country);
           break;
         case 'relative-daily-recovered':
-          this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          if (this.country === 'global') this.relativeDailyRequest('https://api.covid19api.com/world', 'TotalRecovered', 'World');
+          else this.relativeDailyCountryRequest(this.country);
           break;
         default:
           break;
