@@ -1,4 +1,8 @@
+import CanvasChart from '../chart/chart';
+
 let Tabulator = require('tabulator-tables');
+
+const graph = new CanvasChart();
 
 Tabulator = Tabulator.default;
 
@@ -7,6 +11,16 @@ export function getCurrentCountry() {
   list.addEventListener('click', (e) => {
     const row = e.target.parentNode;
     const currentCountry = row.children[1].textContent;
+    let slug = '';
+    for (let i = 0; i < currentCountry.length; i += 1) {
+      if (currentCountry[i] === ' ') {
+        slug += '-';
+      } else {
+        slug += currentCountry[i];
+      }
+    }
+    slug = slug.toLowerCase();
+    graph.buildGraphForCountry(slug);
     return currentCountry;
   });
 }
@@ -48,6 +62,15 @@ async function getNewConfirmedCases() {
         sorter: 'number',
       },
     ],
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
+      }
+      currentRow.classList.add('select-row');
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';
@@ -98,6 +121,15 @@ async function getGLobalCases() {
         sorter: 'number',
       },
     ],
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
+      }
+      currentRow.classList.add('select-row');
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';
@@ -155,6 +187,15 @@ async function getPer100ThosandCases() {
         sorter: 'number',
       },
     ],
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
+      }
+      currentRow.classList.add('select-row');
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';
