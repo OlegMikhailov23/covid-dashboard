@@ -49,6 +49,11 @@
   background-color: black;
 }
 
+.tabulator-row{
+  color: white;
+  background-color: black;
+}
+
 .tabulator-row .tabulator-cell{
   border: none;
   height: 40px;
@@ -81,11 +86,15 @@
 
 .tabulator-row.tabulator-row-even{
   color: white;
+  background-color:black;
+}
+
+.tabulator-row-even{
   background-color: black;
 }
 
 .tabulator-row.tabulator-selectable:hover{
-  background-color: black;
+  background-color:rgb(94, 178, 218);
   border-top: 1px solid red;
   border-bottom: 1px solid red;
 }
@@ -100,4 +109,8 @@ input{
   border-bottom: 2px solid rgb(148, 134, 134);
   border-right: 2px solid rgb(148, 134, 134);
   color: red;
+}
+
+.select-row{
+  background-color: rgb(94, 178, 218);
 }
