@@ -1,6 +1,8 @@
 import markupPopup from './map.markup';
 import helperMap from './map.helper';
 
+const addZero = (numb) => (parseInt(numb, 10) < 10 ? '0' : '') + numb;
+
 class Map {
   constructor(layout, data) {
     this.layout = layout;
@@ -15,7 +17,7 @@ class Map {
     this.date = this.today.getDate();
     this.month = this.today.getMonth() + 1;
     this.year = this.today.getFullYear();
-    this.fullDate = `${helperMap.addZero(this.date)}.${helperMap.addZero(this.month)}.${this.year}`;
+    this.fullDate = `${addZero(this.date)}.${addZero(this.month)}.${this.year}`;
 
     // eslint-disable-next-line no-undef
     this.map = L.map('mapid').setView([59.534, 31.172], 2);
