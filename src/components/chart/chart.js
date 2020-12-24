@@ -56,10 +56,6 @@ class CanvasChart {
     toFullScreen();
   }
 
-  init() {
-    console.log(this);
-  }
-
   createBarGraph(data, labels, place = 'World') {
     this.configedChart = new Chart(this.ctx, {
       type: 'bar',
@@ -261,7 +257,6 @@ class CanvasChart {
   }
 
   relativeOverallCountryRequest(country) {
-    console.log(country, 'country name inside req');
     let url;
     switch (this.select.value) {
       case 'relative-overall-cases':
