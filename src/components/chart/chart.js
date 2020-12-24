@@ -12,6 +12,18 @@ async function getPromiseWithPopulationForCountry(iso2) {
     .then((data) => data.population);
 }
 
+async function getPromiseWithPopulationForWorld() {
+  return fetch('https://world-population.p.rapidapi.com/worldpopulation', {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': 'ccb64c06cemshdec83e276b95801p1c79fejsnefcc7e3a352d',
+      'x-rapidapi-host': 'world-population.p.rapidapi.com',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => data.body.world_population);
+}
+
 class CanvasChart {
   constructor() {
     this.ctx = document.getElementById('graph').getContext('2d');
@@ -119,13 +131,17 @@ class CanvasChart {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        const coefficient = 7600000000 / 100000;
-        const dataArr = result.sort((a, b) => a[key] - b[key]);
-        const sortedArr = dataArr.map((a) => Math.floor(a[key] / coefficient));
-        this.configedChart.destroy();
-        this.createBarGraph(sortedArr,
-          dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
-          title);
+        const worldPopulationPromise = getPromiseWithPopulationForWorld();
+        worldPopulationPromise
+          .then((worldPopulation) => {
+            const coefficient = worldPopulation / 100000;
+            const dataArr = result.sort((a, b) => a[key] - b[key]);
+            const sortedArr = dataArr.map((a) => Math.floor(a[key] / coefficient));
+            this.configedChart.destroy();
+            this.createBarGraph(sortedArr,
+              dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
+              title);
+          });
       });
   }
 
@@ -133,20 +149,24 @@ class CanvasChart {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        const coefficient = 7600000000 / 100000;
-        const dataArr = result.sort((a, b) => a[key] - b[key]);
-        const sortedArr = dataArr.map((a) => Math.floor(a[key] / coefficient));
-        const copy = [].concat(sortedArr);
-        sortedArr.forEach((v, i, arr) => {
-          if (i > 0) {
-            copy[i] = arr[i] - arr[i - 1];
-          }
-        });
-        copy.shift();
-        this.configedChart.destroy();
-        this.createBarGraph(copy,
-          dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
-          title);
+        const worldPopulationPromise = getPromiseWithPopulationForWorld();
+        worldPopulationPromise
+          .then((worldPopulation) => {
+            const coefficient = worldPopulation / 100000;
+            const dataArr = result.sort((a, b) => a[key] - b[key]);
+            const sortedArr = dataArr.map((a) => Math.floor(a[key] / coefficient));
+            const copy = [].concat(sortedArr);
+            sortedArr.forEach((v, i, arr) => {
+              if (i > 0) {
+                copy[i] = arr[i] - arr[i - 1];
+              }
+            });
+            copy.shift();
+            this.configedChart.destroy();
+            this.createBarGraph(copy,
+              dataArr.map((v, i, arr) => getDayOfStat((arr.length - i - 1))),
+              title);
+          });
       });
   }
 
