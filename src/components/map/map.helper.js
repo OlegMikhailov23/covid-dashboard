@@ -13,11 +13,6 @@ const helperMap = {
     });
   },
 
-  addZero(numb) {
-    // eslint-disable-next-line no-unused-expressions
-    (parseInt(numb, 10) < 10 ? '0' : '') + numb;
-  },
-
   activateTab(obj, all, toAdd) {
     document.querySelectorAll(all).forEach((it) => {
       it.classList.remove(toAdd);
@@ -29,10 +24,6 @@ const helperMap = {
     document.querySelectorAll('.game-board__star-container__star').forEach((it) => {
       it.remove();
     });
-  },
-
-  disableIt(el) {
-    el.classList.add('disabled');
   },
 };
 
