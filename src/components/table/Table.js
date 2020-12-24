@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
@@ -78,12 +77,11 @@ export default class Table {
             };
           }
         }
-        console.log(people);
+        // console.log(people);
       }
     }
 
     const table = new Tabulator('.content__table__data', {
-      height: '430px',
       columnMaxWidth: 300,
       data: tabledata,
       layout: 'fitColumns',
