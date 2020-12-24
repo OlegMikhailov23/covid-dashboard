@@ -6,6 +6,12 @@ function getDayOfStat(before) {
   return date;
 }
 
+async function getPromiseWithPopulationForCountry(iso2) {
+  return fetch(`https://restcountries.eu/rest/v2/alpha/${iso2}`)
+    .then((response) => response.json())
+    .then((data) => data.population);
+}
+
 class CanvasChart {
   constructor() {
     this.ctx = document.getElementById('graph').getContext('2d');
@@ -144,8 +150,13 @@ class CanvasChart {
       });
   }
 
-  overallCountryRequest(country) {
+  buildGraphForCountry(country) {
+    this.select.value = 'overall-cases';
     this.country = country;
+    this.overallCountryRequest(country);
+  }
+
+  overallCountryRequest(country) {
     let url;
     switch (this.select.value) {
       case 'overall-cases':
@@ -171,7 +182,6 @@ class CanvasChart {
   }
 
   dailyCountryRequest(country) {
-    this.country = country;
     let url;
     switch (this.select.value) {
       case 'daily-cases':
@@ -204,7 +214,6 @@ class CanvasChart {
   }
 
   relativeOverallCountryRequest(country) {
-    this.country = country;
     let url;
     switch (this.select.value) {
       case 'relative-overall-cases':
@@ -222,17 +231,19 @@ class CanvasChart {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        // POPULATION NEED TO GET POPULATION FOR SPECIAL COUNTRY
-        // const coefficient = POPULATION / 100000;
-        const cases = result.map((v) => Math.floor(v.Cases / 577.8));
-        const dates = result.map((v) => new Date(v.Date));
-        this.configedChart.destroy();
-        this.createBarGraph(cases, dates, country);
+        const iso2 = result[0].CountryCode;
+        const populationPromise = getPromiseWithPopulationForCountry(iso2);
+        populationPromise.then((population) => {
+          const coefficient = population / 100000;
+          const cases = result.map((v) => Math.floor(v.Cases / coefficient));
+          const dates = result.map((v) => new Date(v.Date));
+          this.configedChart.destroy();
+          this.createBarGraph(cases, dates, country);
+        });
       });
   }
 
   relativeDailyCountryRequest(country) {
-    this.country = country;
     let url;
     switch (this.select.value) {
       case 'relative-daily-cases':
@@ -250,26 +261,27 @@ class CanvasChart {
     fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        // POPULATION NEED TO GET POPULATION FOR SPECIAL COUNTRY
-        // const coefficient = POPULATION / 100000;
-        const cases = result.map((v) => Math.floor(v.Cases / 577.8));
-        const dates = result.map((v) => new Date(v.Date));
-        const copy = [].concat(cases);
-        cases.forEach((v, i, arr) => {
-          if (i > 0) {
-            copy[i] = arr[i] - arr[i - 1];
-          }
+        const iso2 = result[0].CountryCode;
+        const populationPromise = getPromiseWithPopulationForCountry(iso2);
+        populationPromise.then((population) => {
+          const coefficient = population / 100000;
+          const cases = result.map((v) => Math.floor(v.Cases / coefficient));
+          const dates = result.map((v) => new Date(v.Date));
+          const copy = [].concat(cases);
+          cases.forEach((v, i, arr) => {
+            if (i > 0) {
+              copy[i] = arr[i] - arr[i - 1];
+            }
+          });
+          copy.shift();
+          this.configedChart.destroy();
+          this.createBarGraph(copy, dates, country);
         });
-        copy.shift();
-        this.configedChart.destroy();
-        this.createBarGraph(copy, dates, country);
       });
   }
 
   makeNewGraph() {
     this.select.addEventListener('change', (v) => {
-      // Need to be refactor
-      // !!! check for country or world
       switch (v.target.value) {
         case 'overall-cases':
           if (this.country === 'global') this.overallRequest('https://api.covid19api.com/world', 'TotalConfirmed', 'World');
