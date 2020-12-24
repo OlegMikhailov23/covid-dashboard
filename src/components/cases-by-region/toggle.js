@@ -2,11 +2,13 @@ let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
 
+let currentCountry = null;
+
 export function getCurrentCountry() {
   const list = document.querySelector('.tabulator-tableHolder');
   list.addEventListener('click', (e) => {
     const row = e.target.parentNode;
-    const currentCountry = row.children[1].textContent;
+    currentCountry = row.children[1].textContent;
     return currentCountry;
   });
 }
