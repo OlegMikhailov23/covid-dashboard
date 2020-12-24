@@ -6,6 +6,15 @@ function getDayOfStat(before) {
   return date;
 }
 
+function toFullScreen() {
+  const content = document.querySelector('.content__chart');
+  const screenButton = document.querySelector('.chart__fullscreen-btn');
+  content.classList.add('chart__top');
+  screenButton.addEventListener('click', () => {
+    content.classList.toggle('to-full-screen');
+  });
+}
+
 async function getPromiseWithPopulationForCountry(iso2) {
   return fetch(`https://restcountries.eu/rest/v2/alpha/${iso2}`)
     .then((response) => response.json())
@@ -33,7 +42,7 @@ class CanvasChart {
 
   init() {
     this.firstRequest('https://api.covid19api.com/world');
-    this.toFullScreen();
+    toFullScreen();
   }
 
   createBarGraph(data, labels, place = 'World') {
@@ -355,15 +364,6 @@ class CanvasChart {
         default:
           break;
       }
-    });
-  }
-
-  toFullScreen() {
-    const content = document.querySelector('.content__chart');
-    const screenButton = document.querySelector('.chart__fullscreen-btn');
-    screenButton.addEventListener('click', () => {
-      content.classList.toggle('to-full-screen');
-      setTimeout(() => { this.map.invalidateSize(); }, 400);
     });
   }
 }
