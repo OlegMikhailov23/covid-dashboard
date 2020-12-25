@@ -70,6 +70,7 @@ class CanvasChart {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         tooltips: {
           callbacks: {
             title: (tt) => tt[0].xLabel.slice(0, -12),
