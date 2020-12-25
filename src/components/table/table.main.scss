@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   & * {
     font-size: 14px;
@@ -11,82 +12,150 @@
   }
 
   &__data {
+    .tabulator{
+      overflow-x:hidden;
+      font-size: 18px;
+      border: none;
+    }
+  
+    .tabulator-row .tabulator-cell{
+      border: none;
+      height: 40px;
+    }
+  
+    .tabulator .tabulator-header .tabulator-col{
+      background-color: rgb(47, 79, 79);
+      border: none;
+    }
+  
+    .tabulator .tabulator-header, .tabulator .tabulator-header *{
+      color: white;
+      background-color: rgb(128, 128, 128);
+      border: none;
+    }
+  
+    .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover{
+      color: white;
+      background-color: rgb(128, 128, 128);
+    }
+  
+    .tabulator .tabulator-tableHolder{
+      background-color: rgb(47, 79, 79);
+    }
+  
+    .tabulator-row-odd{
+      color: white;
+      background-color: rgb(47, 79, 79);
+    }
+  
+    .tabulator-row.tabulator-row-even{
+      color: white;
+      background-color: rgb(47, 79, 79);
+    }
+  
+    .tabulator-row.tabulator-selectable:hover{
+      background-color: rgb(47, 79, 79);
+      border-top: 1px solid red;
+      border-bottom: 1px solid red;
+      color: yellow;
+    }    
 
+    .tabulator-cell {
+      width: 25%;
+    }
   }
 
   &__switcher {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
 
     div {
-      border: 2px solid white;
+      width: 25%;
+      height: 100%;
+      text-align: center;
+      background-color: rgb(128, 128, 128);
     }
 
     div:hover {
       cursor: pointer;
       color: yellow;
     }
-  }
 
-  .tabulator{
-    overflow-x:hidden;
-    font-size: 18px;
-    border: none;
-  }
+    .content__table__switcher__full-screen-btn {
+      width: 20px;
+      height: 20px;
+      background-color: #2e2e2e;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-image: url("../assets/img/full-screen-selector.svg");
+      background-repeat: no-repeat;
+      background-size: 70% 70%;
+      background-position: center;
+      border: none;
+      cursor: pointer;     
+    }
 
-  .tabulator-row .tabulator-cell{
-    border: none;
-    height: 40px;
+    .active-button{
+      border-left: 2px solid rgb(148, 134, 134);
+      border-bottom: 2px solid rgb(148, 134, 134);
+      border-right: 2px solid rgb(148, 134, 134);
+      color: red;
+      background-color: rgb(47, 79, 79)
+    }
   }
+  
+  &__modal-table {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(47, 79, 79);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-  .tabulator .tabulator-header .tabulator-col{
-    background: black;
-    border: none;
+    &__close-btn {
+      border: 2px solid white;
+
+      &:hover {
+        cursor: pointer;
+        color: yellow;
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      div {
+        margin-bottom: 10px;
+
+        span:nth-child(2) {
+          color: yellow;
+        }
+      }
+    }
   }
+}
 
-  .tabulator .tabulator-header{
-    color: white;
-    background-color: black;
-    border: none;
-  }
+.to-full-screen {
+  top: 0 !important;
+  right: 0 !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
 
-  .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover{
-    color: white;
-    background-color: black;
-  }
+  .tabulator-table {
+    width: 100%;
 
-  .tabulator .tabulator-tableHolder{
-    background-color: black;
-  }
-
-  .tabulator-row-odd{
-    color: white;
-    background-color: black;
-  }
-
-  .tabulator-row.tabulator-row-even{
-    color: white;
-    background-color: black;
-  }
-
-  .tabulator-row.tabulator-selectable:hover{
-    background-color: black;
-    border-top: 1px solid red;
-    border-bottom: 1px solid red;
-    color: yellow;
-  }
-
-  input{
-    color: white;
-    background-color: black;
-  }
-
-  .active-button{
-    border-left: 2px solid rgb(148, 134, 134);
-    border-bottom: 2px solid rgb(148, 134, 134);
-    border-right: 2px solid rgb(148, 134, 134);
-    color: red;
+    .tabulator-cell {
+      width: 25%;
+    }
   }
 }

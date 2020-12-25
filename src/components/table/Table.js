@@ -1,6 +1,11 @@
+/* eslint-disable */
+import getDataTable from './ModalTable';
+
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
+
+const removeBrackets = (str) => str.split('(')[0].trim();
 
 export default class Table {
   constructor(data, population) {
@@ -9,6 +14,7 @@ export default class Table {
   }
 
   init() {
+    this.tableWindow = document.querySelector('.content__table');
     this.tableData = document.querySelector('.content__table__data');
     this.swtchBtn = document.querySelector('.content__table__switcher').children;
 
@@ -37,14 +43,9 @@ export default class Table {
       this.switchWindow(true, 'NewConfirmed', 'NewDeaths', 'NewRecovered');
     });
 
-    // console.log(this.population, typeof this.population)
-    // for (let i = 0; i < this.data.Countries.length; i += 1) {
-    //   for (let j = 0; j < this.population.length; j += 1) {
-    //     if (this.data.Countries[i].Country === this.population[j].name) {
-    //       console.log(this.population[j].population);
-    //     }
-    //   }
-    // }
+    document.querySelector('.content__table__switcher__full-screen-btn').addEventListener('click', () => {
+      this.toFullScreen();
+    });
 
     return this;
   }
@@ -66,7 +67,7 @@ export default class Table {
         let people = null;
 
         for (let j = 0; j < this.population.length; j += 1) {
-          if (this.data.Countries[i].Country === this.population[j].name) {
+          if (removeBrackets(this.data.Countries[i].Country) === removeBrackets(this.population[j].name)) {
             people = this.population[j].population;
 
             tabledata[i] = {
@@ -77,42 +78,38 @@ export default class Table {
             };
           }
         }
-        // console.log(people);
       }
     }
 
     const table = new Tabulator('.content__table__data', {
-      columnMaxWidth: 300,
       data: tabledata,
       layout: 'fitColumns',
       columns: [
         {
           title: 'Country',
           field: 'name',
-          width: '20%',
           headerSort: true,
         },
         {
           title: 'Confirmend',
           field: 'totalConfirmed',
-          width: '25%',
           sorter: 'number',
         },
         {
           title: 'Deaths',
           field: 'totalDeaths',
-          width: '25%',
           sorter: 'number',
         },
         {
           title: 'Recovered',
           field: 'totalRecovered',
-          width: '25%',
           sorter: 'number',
         },
       ],
+      rowClick(i, row) {
+        getDataTable(row.getData().name);
+      },
     });
-
     return table;
   }
 
@@ -121,5 +118,9 @@ export default class Table {
       this.swtchBtn[i].classList.remove('active-button');
     }
     element.classList.add('active-button');
+  }
+
+  toFullScreen() {
+    this.tableWindow.classList.toggle('to-full-screen');
   }
 }

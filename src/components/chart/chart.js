@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Chart from 'chart.js';
 
 function getDayOfStat(before) {
@@ -33,14 +34,25 @@ async function getPromiseWithPopulationForWorld() {
     .then((data) => data.body.world_population);
 }
 
+async function getSlugFromCountryName(country) {
+  return fetch('https://api.covid19api.com/countries')
+    .then((response) => response.json())
+    .then((arr) => {
+      let slug;
+      arr.forEach((v) => {
+        if (v.Country === country) {
+          slug = v.Slug;
+        }
+      });
+      return slug;
+    });
+}
+
 class CanvasChart {
   constructor() {
     this.ctx = document.getElementById('graph').getContext('2d');
     this.country = 'global';
     this.select = document.querySelector('.chart__select');
-  }
-
-  init() {
     this.firstRequest('https://api.covid19api.com/world');
     toFullScreen();
   }
@@ -58,6 +70,7 @@ class CanvasChart {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         tooltips: {
           callbacks: {
             title: (tt) => tt[0].xLabel.slice(0, -12),
@@ -181,9 +194,11 @@ class CanvasChart {
   }
 
   buildGraphForCountry(country) {
-    this.select.value = 'overall-cases';
-    this.country = country;
-    this.overallCountryRequest(country);
+    getSlugFromCountryName(country).then((slug) => {
+      this.select.value = 'overall-cases';
+      this.country = slug;
+      this.overallCountryRequest(slug);
+    });
   }
 
   overallCountryRequest(country) {

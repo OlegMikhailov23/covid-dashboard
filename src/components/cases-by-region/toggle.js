@@ -1,3 +1,4 @@
+import getDataTable from '../table/ModalTable';
 import CanvasChart from '../chart/chart';
 
 let Tabulator = require('tabulator-tables');
@@ -11,16 +12,11 @@ export function getCurrentCountry() {
   list.addEventListener('click', (e) => {
     const row = e.target.parentNode;
     const currentCountry = row.children[1].textContent;
-    let slug = '';
-    for (let i = 0; i < currentCountry.length; i += 1) {
-      if (currentCountry[i] === ' ') {
-        slug += '-';
-      } else {
-        slug += currentCountry[i];
-      }
-    }
-    slug = slug.toLowerCase();
-    graph.buildGraphForCountry(slug);
+
+    getDataTable(currentCountry);
+
+    graph.buildGraphForCountry(currentCountry);
+
     return currentCountry;
   });
 }
