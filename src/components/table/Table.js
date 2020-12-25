@@ -14,6 +14,7 @@ export default class Table {
   }
 
   init() {
+    this.tableWindow = document.querySelector('.content__table');
     this.tableData = document.querySelector('.content__table__data');
     this.swtchBtn = document.querySelector('.content__table__switcher').children;
 
@@ -40,6 +41,10 @@ export default class Table {
     this.btnLastDayPer100.addEventListener('click', () => {
       this.toggleStyle(this.btnLastDayPer100);
       this.switchWindow(true, 'NewConfirmed', 'NewDeaths', 'NewRecovered');
+    });
+
+    document.querySelector('.content__table__switcher__full-screen-btn').addEventListener('click', () => {
+      this.toFullScreen();
     });
 
     return this;
@@ -118,5 +123,9 @@ export default class Table {
       this.swtchBtn[i].classList.remove('active-button');
     }
     element.classList.add('active-button');
+  }
+
+  toFullScreen() {
+    this.tableWindow.classList.toggle('to-full-screen');
   }
 }

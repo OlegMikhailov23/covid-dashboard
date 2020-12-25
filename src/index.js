@@ -1,7 +1,5 @@
 import './sass/style.scss';
 
-import './components/table/table.main.scss';
-
 import getGLobalCases from './components/cases-by-region/CasesByRegion';
 
 import getData from './components/table/table.main';
