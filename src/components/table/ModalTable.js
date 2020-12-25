@@ -9,30 +9,47 @@ class ModalTable {
   }
 
   init() {
+    this.content = document.querySelector('.content__table__modal-table__content');
     document.querySelector('.content__table__modal-table__close-btn').addEventListener('click', () => {
       document.querySelector('.content__table__modal-table').style.visibility = 'hidden';
     });
 
-    this.findData();
-    this.findPopulation();
+    this.buildModal();
   }
 
   findData() {
     for (let i = 0; i < this.data.Countries.length; i += 1) {
       if (removeBrackets(this.data.Countries[i].Country) === this.country) {
-        // console.log(this.data.Countries[i]);
-        return;
+        return this.data.Countries[i]
       }
     }
   }
 
   findPopulation() {
-    for (let i = 0; i < this.data.Countries.length; i += 1) {
-      if (removeBrackets(this.data.Countries[i].Country) === this.country) {
-      // console.log(this.data.Countries[i]);
-        return;
+    for (let i = 0; i < this.population.length; i += 1) {
+      if (removeBrackets(this.population[i].name) === this.country) {
+        return this.population[i];
       }
     }
+  }
+
+  buildModal() {
+    this.currentData = this.findData();
+    this.currentPopulation = this.findPopulation().population;
+    this.content.innerHTML = `<div><span>Country: </span><span>${this.currentData.Country}</span></div>`;
+    this.content.innerHTML += `<div><span>Total Confirmed: </span><span>${this.currentData.TotalConfirmed}</span></div>`;
+    this.content.innerHTML += `<div><span>Total Deaths: </span><span>${this.currentData.TotalDeaths}</span></div>`;
+    this.content.innerHTML += `<div><span>Total Recovered: </span><span>${this.currentData.TotalRecovered}</span></div>`;
+    this.content.innerHTML += `<div><span>New Confirmed: </span><span>${this.currentData.NewConfirmed}</span></div>`;
+    this.content.innerHTML += `<div><span>New Deaths: </span><span>${this.currentData.NewDeaths}</span></div>`;
+    this.content.innerHTML += `<div><span>New Recovered: </span><span>${this.currentData.NewRecovered}</span></div>`;
+
+    this.content.innerHTML += `<div><span>Total Confirmed per 100k people: </span><span>${((this.currentData.TotalConfirmed * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
+    this.content.innerHTML += `<div><span>Total Deaths per 100k people: </span><span>${((this.currentData.TotalDeaths * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
+    this.content.innerHTML += `<div><span>Total Recovered per 100k people: </span><span>${((this.currentData.TotalRecovered * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
+    this.content.innerHTML += `<div><span>New Confirmed per 100k people: </span><span>${((this.currentData.NewConfirmed * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
+    this.content.innerHTML += `<div><span>New Deaths per 100k people: </span><span>${((this.currentData.NewDeaths * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
+    this.content.innerHTML += `<div><span>New Recovered per 100k people: </span><span>${((this.currentData.NewRecovered * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
   }
 }
 

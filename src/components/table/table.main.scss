@@ -110,5 +110,23 @@
         color: yellow;
       }
     }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      div {
+        margin-bottom: 10px;
+
+        span:nth-child(1) {
+          color: yellow;
+        }
+
+        span:nth-child(2) {
+          color: red;
+        }
+      }
+    }
   }
 }

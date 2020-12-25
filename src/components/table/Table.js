@@ -1,4 +1,6 @@
 /* eslint-disable */
+import getDataTable from './ModalTable';
+
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
@@ -71,7 +73,6 @@ export default class Table {
             };
           }
         }
-        console.log(people);
       }
     }
 
@@ -106,8 +107,8 @@ export default class Table {
           sorter: 'number',
         },
       ],
-      rowClick(i, index) {
-        // console.log(index.getData())
+      rowClick(i, row) {
+        getDataTable(row.getData().name);
       },
     });
     return table;
