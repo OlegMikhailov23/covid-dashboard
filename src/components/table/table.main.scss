@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 
   & * {
     font-size: 14px;
@@ -11,7 +12,65 @@
   }
 
   &__data {
-
+    .tabulator{
+      overflow-x:hidden;
+      font-size: 18px;
+      border: none;
+    }
+  
+    .tabulator-row .tabulator-cell{
+      border: none;
+      height: 40px;
+    }
+  
+    .tabulator .tabulator-header .tabulator-col{
+      background: black;
+      border: none;
+    }
+  
+    .tabulator .tabulator-header{
+      color: white;
+      background-color: black;
+      border: none;
+    }
+  
+    .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover{
+      color: white;
+      background-color: black;
+    }
+  
+    .tabulator .tabulator-tableHolder{
+      background-color: black;
+    }
+  
+    .tabulator-row-odd{
+      color: white;
+      background-color: black;
+    }
+  
+    .tabulator-row.tabulator-row-even{
+      color: white;
+      background-color: black;
+    }
+  
+    .tabulator-row.tabulator-selectable:hover{
+      background-color: black;
+      border-top: 1px solid red;
+      border-bottom: 1px solid red;
+      color: yellow;
+    }
+  
+    input{
+      color: white;
+      background-color: black;
+    }
+  
+    .active-button{
+      border-left: 2px solid rgb(148, 134, 134);
+      border-bottom: 2px solid rgb(148, 134, 134);
+      border-right: 2px solid rgb(148, 134, 134);
+      color: red;
+    }
   }
 
   &__switcher {
@@ -29,64 +88,27 @@
       color: yellow;
     }
   }
-
-  .tabulator{
-    overflow-x:hidden;
-    font-size: 18px;
-    border: none;
-  }
-
-  .tabulator-row .tabulator-cell{
-    border: none;
-    height: 40px;
-  }
-
-  .tabulator .tabulator-header .tabulator-col{
-    background: black;
-    border: none;
-  }
-
-  .tabulator .tabulator-header{
-    color: white;
+  
+  &__modal-table {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-color: black;
-    border: none;
-  }
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-  .tabulator .tabulator-header .tabulator-col.tabulator-sortable:hover{
-    color: white;
-    background-color: black;
-  }
+    &__close-btn {
+      border: 2px solid white;
 
-  .tabulator .tabulator-tableHolder{
-    background-color: black;
-  }
-
-  .tabulator-row-odd{
-    color: white;
-    background-color: black;
-  }
-
-  .tabulator-row.tabulator-row-even{
-    color: white;
-    background-color: black;
-  }
-
-  .tabulator-row.tabulator-selectable:hover{
-    background-color: black;
-    border-top: 1px solid red;
-    border-bottom: 1px solid red;
-    color: yellow;
-  }
-
-  input{
-    color: white;
-    background-color: black;
-  }
-
-  .active-button{
-    border-left: 2px solid rgb(148, 134, 134);
-    border-bottom: 2px solid rgb(148, 134, 134);
-    border-right: 2px solid rgb(148, 134, 134);
-    color: red;
+      &:hover {
+        cursor: pointer;
+        color: yellow;
+      }
+    }
   }
 }

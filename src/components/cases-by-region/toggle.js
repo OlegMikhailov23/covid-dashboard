@@ -1,3 +1,5 @@
+import getDataTable from '../table/ModalTable';
+
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
@@ -7,6 +9,8 @@ export function getCurrentCountry() {
   list.addEventListener('click', (e) => {
     const row = e.target.parentNode;
     const currentCountry = row.children[1].textContent;
+
+    getDataTable(currentCountry);
     return currentCountry;
   });
 }

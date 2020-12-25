@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Chart from 'chart.js';
 
 function getDayOfStat(before) {
