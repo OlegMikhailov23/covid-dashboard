@@ -1,6 +1,11 @@
+/* eslint-disable */
+import getDataTable from './ModalTable';
+
 let Tabulator = require('tabulator-tables');
 
 Tabulator = Tabulator.default;
+
+const removeBrackets = (str) => str.split('(')[0].trim();
 
 export default class Table {
   constructor(data, population) {
@@ -37,15 +42,6 @@ export default class Table {
       this.switchWindow(true, 'NewConfirmed', 'NewDeaths', 'NewRecovered');
     });
 
-    // console.log(this.population, typeof this.population)
-    // for (let i = 0; i < this.data.Countries.length; i += 1) {
-    //   for (let j = 0; j < this.population.length; j += 1) {
-    //     if (this.data.Countries[i].Country === this.population[j].name) {
-    //       console.log(this.population[j].population);
-    //     }
-    //   }
-    // }
-
     return this;
   }
 
@@ -66,7 +62,7 @@ export default class Table {
         let people = null;
 
         for (let j = 0; j < this.population.length; j += 1) {
-          if (this.data.Countries[i].Country === this.population[j].name) {
+          if (removeBrackets(this.data.Countries[i].Country) === removeBrackets(this.population[j].name)) {
             people = this.population[j].population;
 
             tabledata[i] = {
@@ -77,7 +73,6 @@ export default class Table {
             };
           }
         }
-        // console.log(people);
       }
     }
 
@@ -111,8 +106,10 @@ export default class Table {
           sorter: 'number',
         },
       ],
+      rowClick(i, row) {
+        getDataTable(row.getData().name);
+      },
     });
-
     return table;
   }
 

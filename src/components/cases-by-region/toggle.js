@@ -1,3 +1,4 @@
+import getDataTable from '../table/ModalTable';
 import CanvasChart from '../chart/chart';
 
 let Tabulator = require('tabulator-tables');
@@ -11,7 +12,11 @@ export function getCurrentCountry() {
   list.addEventListener('click', (e) => {
     const row = e.target.parentNode;
     const currentCountry = row.children[1].textContent;
+
+    getDataTable(currentCountry);
+
     graph.buildGraphForCountry(currentCountry);
+
     return currentCountry;
   });
 }
