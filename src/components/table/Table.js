@@ -82,32 +82,27 @@ export default class Table {
     }
 
     const table = new Tabulator('.content__table__data', {
-      columnMaxWidth: 300,
       data: tabledata,
       layout: 'fitColumns',
       columns: [
         {
           title: 'Country',
           field: 'name',
-          width: '20%',
           headerSort: true,
         },
         {
           title: 'Confirmend',
           field: 'totalConfirmed',
-          width: '25%',
           sorter: 'number',
         },
         {
           title: 'Deaths',
           field: 'totalDeaths',
-          width: '25%',
           sorter: 'number',
         },
         {
           title: 'Recovered',
           field: 'totalRecovered',
-          width: '25%',
           sorter: 'number',
         },
       ],
