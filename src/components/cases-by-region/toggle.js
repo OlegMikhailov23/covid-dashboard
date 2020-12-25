@@ -1,6 +1,9 @@
 import getDataTable from '../table/ModalTable';
+import CanvasChart from '../chart/chart';
 
 let Tabulator = require('tabulator-tables');
+
+const graph = new CanvasChart();
 
 Tabulator = Tabulator.default;
 
@@ -11,6 +14,9 @@ export function getCurrentCountry() {
     const currentCountry = row.children[1].textContent;
 
     getDataTable(currentCountry);
+
+    graph.buildGraphForCountry(currentCountry);
+
     return currentCountry;
   });
 }
@@ -29,7 +35,6 @@ async function getNewConfirmedCases() {
   }
 
   const table = new Tabulator('#cases__cases-by-region__table', {
-    height: '430px',
     columnMaxWidth: 300,
     data: tabledata,
     layout: 'fitColumns',
@@ -53,6 +58,15 @@ async function getNewConfirmedCases() {
         sorter: 'number',
       },
     ],
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
+      }
+      currentRow.classList.add('select-row');
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';
@@ -80,7 +94,6 @@ async function getGLobalCases() {
   totalStats.innerHTML = `${globalCases}`;
 
   const table = new Tabulator('#cases__cases-by-region__table', {
-    height: '430px',
     columnMaxWidth: 300,
     data: tabledata,
     layout: 'fitColumns',
@@ -104,6 +117,15 @@ async function getGLobalCases() {
         sorter: 'number',
       },
     ],
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
+      }
+      currentRow.classList.add('select-row');
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';
@@ -138,7 +160,6 @@ async function getPer100ThosandCases() {
   totalStats.innerHTML = `${globalCases}`;
 
   const table = new Tabulator('#cases__cases-by-region__table', {
-    height: '430px',
     columnMaxWidth: 300,
     data: tabledata,
     layout: 'fitColumns',
@@ -162,6 +183,15 @@ async function getPer100ThosandCases() {
         sorter: 'number',
       },
     ],
+    rowClick(n, index) {
+      /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
+      const rows = document.querySelectorAll('.tabulator-row');
+      for (let i = 0; i < rows.length; i += 1) {
+        rows[i].classList.remove('select-row');
+      }
+      currentRow.classList.add('select-row');
+      currentRow.classList.remove('tabulator-row-even');
+    },
   });
 
   document.querySelector('input').placeholder = 'Search';

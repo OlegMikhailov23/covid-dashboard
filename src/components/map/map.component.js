@@ -1,84 +1,18 @@
-const createTotalPopup = (name, cases, deaths, recovered, active, flagSrc) => (`
-    <img src="${flagSrc}" class="map__country-flag">
-    <div class="map__country-name">
-        ${name}
-    </div>
-    <div class="map__total-cases">
-        Total cases: ${cases}
-    </div>
-    <div class="map__total-deaths">
-        Total deaths: ${deaths}
-    </div>
-    <div class="map__total-recovered">
-        Recovered: ${recovered}
-    </div>
-    <div class="map__total-active">
-        Active: ${active}
-    </div>
-    `);
-
-const createIncidenceRatePopup = (name, perThousand, flagSrc) => (`
-    <img src="${flagSrc}" class="map__country-flag">
-    <div class="map__country-name">
-        ${name}
-    </div>
-    <div class="map__total-cases">
-        ${perThousand} cases per 100000 people
-    </div>
-    `);
-
-const createTodayPopup = (name, cases, deaths, recovered, flagSrc, date) => (`
-    <date class="map__country-name">
-        ${date}
-    </date>
-    <img src="${flagSrc}" class="map__country-flag">
-    <div class="map__country-name">
-        ${name}
-    </div>
-    <div class="map__total-cases">
-        Cases: ${cases}
-    </div>
-    <div class="map__total-deaths">
-        Deaths: ${deaths}
-    </div>
-    <div class="map__total-recovered">
-        Recovered: ${recovered}
-    </div>
-    `);
-
-const showLayer = () => {
-  const layerContainer = document.querySelector('.map__layout-container');
-  const layerButton = document.querySelector('.map__layout-container__action-button');
-  layerButton.addEventListener('click', () => {
-    layerContainer.classList.toggle('show-layout-container');
-  });
-};
-
-const removeMarker = () => {
-  document.querySelectorAll('.pulse').forEach((it) => {
-    it.remove();
-  });
-};
+import markupPopup from './map.markup';
+import helperMap from './map.helper';
 
 const addZero = (numb) => (parseInt(numb, 10) < 10 ? '0' : '') + numb;
 
-const activateTab = (obj, all, toAdd) => {
-  document.querySelectorAll(all).forEach((it) => {
-    it.classList.remove(toAdd);
-  });
-  obj.classList.add(toAdd);
-};
-
 class Map {
-  constructor(layout) {
+  constructor(layout, data) {
     this.layout = layout;
     this.theme = {
-      dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
-      bright: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png',
-      mid: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png',
-      land: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+      dark: 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
+      bright: 'https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
+      mid: 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
+      land: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png?api_key=6da2f080-0b88-4c56-be28-3de3b9c9e2b5',
     };
-
+    this.data = data;
     this.today = new Date();
     this.date = this.today.getDate();
     this.month = this.today.getMonth() + 1;
@@ -126,6 +60,30 @@ class Map {
     }).addTo(this.map);
   }
 
+  putPointFromTable(name, data) {
+    helperMap.removeMarker('.marker');
+    const obj = data.filter((it) => it.country === name);
+    const { lat, long, flag } = obj[0].countryInfo;
+    this.map.setView([lat, long], 5);
+    // eslint-disable-next-line no-undef
+    this.circle = L.circle([lat, long], {
+      className: 'marker',
+      color: 'red',
+      fillColor: 'red',
+      fillOpacity: 1,
+      radius: 100000,
+    }).addTo(this.map);
+    const customOptions = {
+      className: 'popup',
+      keepInView: true,
+    };
+    const {
+      cases, deaths, active, recovered,
+    } = obj[0];
+    this.map.openPopup(markupPopup.createTotalPopup(obj[0]
+      .country, cases, deaths, recovered, active, flag), [lat, long], customOptions);
+  }
+
   showPopup(message) {
     const customPopup = message;
     const customOptions = {
@@ -154,17 +112,18 @@ class Map {
       }
       if (this.screen === 'total') {
         this.putPoint(lat, long, this.totalColor, this.totalFillColor, int, int);
-        this.showPopup(createTotalPopup(countryName, cases, deaths, recovered, active, flag));
+        this.showPopup(markupPopup
+          .createTotalPopup(countryName, cases, deaths, recovered, active, flag));
       }
       if (this.screen === 'incidenceRate') {
         this.putPoint(lat, long, this.incidenceColor, this.incidenceFillColor,
           int, int * this.incedenceCoefficient);
-        this.showPopup(createIncidenceRatePopup(countryName, perThousand, flag));
+        this.showPopup(markupPopup.createIncidenceRatePopup(countryName, perThousand, flag));
       }
       if (this.screen === 'today') {
         this.putPoint(lat, long, this.todayColor, this.todayFillColor,
           todayDeaths * 0.1, todayDeaths * this.todayDeathsCoefficient);
-        this.showPopup(createTodayPopup(countryName, todayCases,
+        this.showPopup(markupPopup.createTodayPopup(countryName, todayCases,
           todayDeaths, todayRecovered, flag, this.fullDate));
       }
     });
@@ -191,16 +150,16 @@ class Map {
     this.fitBounds();
     this.renderMarker(countries);
     this.toFullScreen();
-    showLayer();
+    helperMap.showLayer();
     document.addEventListener('click', (e) => {
       if (e.target.hasAttribute('mapId')) {
-        activateTab(e.target, '.map__tabs-wrapper__tab', 'map__tabs-wrapper__tab--active');
-        removeMarker();
+        helperMap.activateTab(e.target, '.map__tabs-wrapper__tab', 'map__tabs-wrapper__tab--active');
+        helperMap.removeMarker('.pulse');
         this.screen = e.target.getAttribute('mapId');
         this.renderMarker(countries);
       }
       if (e.target.hasAttribute('idLayout')) {
-        activateTab(e.target, '.map__layout-container__layout-button', 'map__layout-container__layout-button--active');
+        helperMap.activateTab(e.target, '.map__layout-container__layout-button', 'map__layout-container__layout-button--active');
         const target = e.target.getAttribute('idLayout');
         this.changeLayout(target);
       }

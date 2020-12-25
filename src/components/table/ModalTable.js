@@ -1,3 +1,4 @@
+/* eslint-disable */
 const removeBrackets = (str) => str.split('(')[0].trim();
 
 class ModalTable {
@@ -17,22 +18,6 @@ class ModalTable {
     this.buildModal();
   }
 
-  findData() {
-    for (let i = 0; i < this.data.Countries.length; i += 1) {
-      if (removeBrackets(this.data.Countries[i].Country) === this.country) {
-        return this.data.Countries[i]
-      }
-    }
-  }
-
-  findPopulation() {
-    for (let i = 0; i < this.population.length; i += 1) {
-      if (removeBrackets(this.population[i].name) === this.country) {
-        return this.population[i];
-      }
-    }
-  }
-
   buildModal() {
     this.currentData = this.findData();
     this.currentPopulation = this.findPopulation().population;
@@ -50,6 +35,22 @@ class ModalTable {
     this.content.innerHTML += `<div><span>New Confirmed per 100k people: </span><span>${((this.currentData.NewConfirmed * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
     this.content.innerHTML += `<div><span>New Deaths per 100k people: </span><span>${((this.currentData.NewDeaths * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
     this.content.innerHTML += `<div><span>New Recovered per 100k people: </span><span>${((this.currentData.NewRecovered * 100000) / this.currentPopulation).toFixed(4)}</span></div>`;
+  }
+
+  findData() {
+    for (let i = 0; i < this.data.Countries.length; i += 1) {
+      if (removeBrackets(this.data.Countries[i].Country) === this.country) {
+        return this.data.Countries[i];
+      }
+    }
+  }
+
+  findPopulation() {
+    for (let i = 0; i < this.population.length; i += 1) {
+      if (removeBrackets(this.population[i].name) === this.country) {
+        return this.population[i];
+      }
+    }
   }
 }
 
