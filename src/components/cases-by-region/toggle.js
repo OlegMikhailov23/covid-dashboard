@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import CanvasChart from '../chart/chart';
 
 let Tabulator = require('tabulator-tables');
@@ -64,73 +63,6 @@ async function getNewConfirmedCases() {
       },
     ],
     rowClick(n, index) {
-=======
-import CanvasChart from '../chart/chart';
-
-let Tabulator = require('tabulator-tables');
-
-const graph = new CanvasChart();
-
-Tabulator = Tabulator.default;
-
-export function getCurrentCountry() {
-  const list = document.querySelector('.tabulator-tableHolder');
-  list.addEventListener('click', (e) => {
-    const row = e.target.parentNode;
-    const currentCountry = row.children[1].textContent;
-    let slug = '';
-    for (let i = 0; i < currentCountry.length; i += 1) {
-      if (currentCountry[i] === ' ') {
-        slug += '-';
-      } else {
-        slug += currentCountry[i];
-      }
-    }
-    slug = slug.toLowerCase();
-    graph.buildGraphForCountry(slug);
-    return currentCountry;
-  });
-}
-
-async function getNewConfirmedCases() {
-  const response = await fetch('https://api.covid19api.com/summary');
-  const content = await response.json();
-  const tabledata = [];
-
-  for (let i = 0; i < content.Countries.length; i += 1) {
-    tabledata[i] = {
-      flags: `https://www.countryflags.io/${content.Countries[i].CountryCode}/shiny/24.png`,
-      name: `${content.Countries[i].Country}`,
-      newConfirmed: `${content.Countries[i].NewConfirmed}`,
-    };
-  }
-
-  const table = new Tabulator('#cases__cases-by-region__table', {
-    columnMaxWidth: 300,
-    data: tabledata,
-    layout: 'fitColumns',
-    columns: [
-      {
-        field: 'flags',
-        width: '1%',
-        formatter: 'image',
-        headerSort: false,
-      },
-      {
-        title: 'Country',
-        field: 'name',
-        width: '50%',
-        headerFilter: 'input',
-      },
-      {
-        title: 'Cases',
-        field: 'newConfirmed',
-        width: '31%',
-        sorter: 'number',
-      },
-    ],
-    rowClick(n, index) {
->>>>>>> 01b1dc323ff51a3b7d1cbb2b19ac77f33868db9b
       /* eslint-disable */const currentRow = index._row.element;/* eslint-disable */
       const rows = document.querySelectorAll('.tabulator-row');
       for (let i = 0; i < rows.length; i += 1) {
