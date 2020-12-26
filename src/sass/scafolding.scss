@@ -21,13 +21,11 @@ body {
   font-weight: 400;
   background-color: $body-bg;
   font-size: $main-font-size;
+  background-image: url("../assets/img/virus.svg");
+  background-size: 30px 30px;
   line-height: $main-line-height;
   color: $main-font-color;
-  background-size: 100% 100%;
-  padding: 10px;
   margin: 0;
-  color: white;
-  font-size: 32px;
   display: flex;
   justify-content: center;
 }
