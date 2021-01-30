@@ -1,0 +1,233 @@
+@import '../../sass/variables';
+@import '../../sass/mixin';
+
+#mapid {
+  transition: all 0.3s ease;
+}
+
+.popup .leaflet-popup-tip,
+.popup .leaflet-popup-content-wrapper {
+  position: relative;
+  background: #2e2e2e;
+  border-radius: 0;
+  min-width: 210px;
+  border: 1px solid #cc22f1;
+  color: #cdcdcd;
+  font-size: 1.2rem;
+  & .map__country-name {
+    color: $third-font-color;
+    padding-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.06rem;
+  }
+  & .map__total-cases {
+    color: #eee228;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+  }
+  & .map__total-deaths {
+    position: relative;
+    color: $second-font-color;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+    &::before {
+      @include pseudo();
+      top:-5px;
+      left: -20px;
+      width: 20px;
+      height: 20px;
+      background-image: url("../assets/img/reaper.svg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+    }
+  }
+  & .map__total-recovered {
+    position: relative;
+    color: $fourth-font-color;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+  }
+
+  & .map__total-active {
+    position: relative;
+    color: $fifth-font-color;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+  }
+
+  & .map__country-flag {
+    position: absolute;
+    width: 30px;
+    height: 17px;
+    right: 10%;
+    top: 15%;
+  }
+}
+
+.pulse {
+  animation: pulsate 3s infinite;
+}
+
+.map__tabs-wrapper {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  z-index: 500;
+  left: 0
+}
+
+.map__tabs-wrapper__tab {
+  margin-right: 2px;
+  background-color: $btn-bg;
+  color: $third-font-color;
+  padding: 3px;
+  border: 1px solid #cc22f1;
+  border-bottom: 3px solid #cc22f1;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.06rem;
+  &:hover {
+    border: 1px solid $hover-border-color;
+    border-bottom: 3px solid $hover-border-color;
+    background-color: $btn-bg-hover-color;
+  }
+}
+.map__layout-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  padding-top: 30px;
+  background-color: $btn-bg;
+  top: 0;
+  right: 30px;
+  z-index: 500;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  cursor: auto;
+  & .map__layout-container__layout-button {
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: $third-font-color;
+    text-align: left;
+    font-size: 1.3rem;
+    padding-left: 50px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $btn-bg-hover-color;
+    }
+  }
+}
+
+.map__layout-container .map__layout-container__layout-button--active {
+  background-color: $btn-bg-hover-color;
+}
+
+.map__layout-container__layout-button::before {
+  @include pseudo();
+  top: 0;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  border: 1px solid $disabled-border;
+}
+
+.map__layout-container__layout-button:nth-child(2)::before {
+  background-image: url("../assets/img/dark.png");
+}
+
+.map__layout-container__layout-button:nth-child(3)::before {
+  background-image: url("../assets/img/bright.png");
+}
+
+.map__layout-container__layout-button:nth-child(4)::before {
+  background-image: url("../assets/img/middle.png");
+}
+
+.map__layout-container__layout-button:nth-child(5)::before {
+  background-image: url("../assets/img/landscape.png");
+}
+
+.map__layout-container__action-button {
+  @include pseudo();
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  background-image: url("../assets/img/list.svg");
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  background-position: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  &:hover {
+    background-color: $btn-bg-hover-color;
+  }
+}
+
+.show-layout-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 200px;
+  overflow: visible;
+  transform: translateX(-5px);
+}
+
+
+.map__tabs-wrapper__tab--active {
+  border-bottom: 3px solid #ed4679;
+  background-color: $btn-bg-hover-color;
+}
+
+.map__full-screen {
+  width: 30px;
+  height: 30px;
+  background-color: $btn-bg;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-image: url("../assets/img/full-screen-selector.svg");
+  background-repeat: no-repeat;
+  background-size: 70% 70%;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  z-index: 500;
+  &:hover {
+    background-color: $btn-bg-hover-color;
+  }
+}
+
+.marker {
+  z-index: 0;
+  animation: pulsate 3s infinite;
+}
+
+.to-full-screen {
+  top: 0 !important;
+  right: 0 !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@keyframes pulsate {
+  0% {opacity: 0.4;}
+  70% {opacity: 1.0;}
+  100% {opacity: 0.4;}
+}
+

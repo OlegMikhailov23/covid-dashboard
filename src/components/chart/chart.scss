@@ -1,0 +1,43 @@
+.wrapper-for-content .content__chart {
+  position: relative;
+  background-color: #222;
+}
+
+.chart__select {
+  display: block;
+  margin: 0 auto;
+  background-color: #222;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.chart__wrap-graph {
+  position: relative;
+  width: 100%;
+  height: 85%;
+}
+
+.chart__fullscreen-btn {
+  width: 20px;
+    height: 20px;
+    background-color: #2e2e2e;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url(../assets/img/full-screen-selector.svg);
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.to-full-screen {
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}

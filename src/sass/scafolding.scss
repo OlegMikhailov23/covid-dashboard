@@ -1,0 +1,47 @@
+@import "variables.scss";
+@import "mixin.scss";
+
+@font-face {
+  font-weight: 400;
+  font-family: 'Nunito';
+  font-style: normal;
+  src: url('../assets/fonts/nunito-regular.ttf');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'Nunito';
+  font-style: normal;
+  src: url('../assets/fonts/nunito-bold.ttf');
+}
+
+body {
+  position: relative;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+  background-color: $body-bg;
+  font-size: $main-font-size;
+  background-image: url("../assets/img/virus.svg");
+  background-size: 30px 30px;
+  line-height: $main-line-height;
+  color: $main-font-color;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
